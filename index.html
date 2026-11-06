@@ -24,7 +24,6 @@ canvas{display:block;width:min(100vw, calc(100vh * 960 / 440));height:min(100vh,
 <script>
 (function(){
 'use strict';
-const HOOK={};
 function updateBest(){}
 const $=s=>document.querySelector(s);
 const css=getComputedStyle(document.documentElement);
@@ -56,6 +55,7 @@ const memBest={};
 function getBest(k){let v=0;try{v=Number(localStorage.getItem('proto3_best_'+k))||0}catch(e){}return Math.max(v,memBest[k]||0)}
 function saveBest(k,v){if(v>getBest(k)){memBest[k]=v;try{localStorage.setItem('proto3_best_'+k,String(v))}catch(e){}}updateBest()}
 
+const HOOK={};
 /* ====================== 多语言 ====================== */
 const I18N={
 en:{
@@ -69,7 +69,7 @@ en:{
  dodge:['The guild warned us about this!','Saw that coming!','I know this one~','Nice try.','It\'s in the guild notes.'],
  esc:['That\'s it? I\'ll be back!','Too easy!','I\'ll be back with experience!'],
  goal:{arrow:'Kill 10 heroes with Spikes in one run',rock:'Kill a hero while he opens a chest (3 total)',boulder:'Survive wave 5',spring:'Kill 2 heroes at once with one trap',ice:'Let no one escape for 3 waves in a row (one run)',ceil:'Make heroes hit the ceiling (5 total)',flame:'Kill Shield Knights (5 total)',portal:'Kill Veterans (3 total)',gas:'Survive wave 10'},
- ui:{unlockNew:'New trap unlocked: {name}! It can now appear in draws',gotTrap:'New trap: {name}',gotUpg:'Upgrade: {name}',schoolDone:'Build complete: {name} · {bonus}',rerollNoGold:'Not enough gold. Reroll costs {n}',newClass:'New class: {name} · {info}',affixNow:'Wave modifier · {a}',waveHeld:'Wave {n} held! +{g} gold',forgot:'Unused traps, the guild forgot: {list}',listSep:', ',broke:'{name} broke',bossTaunt:'Is that all?',tough:'Tough skin!',ah:'Argh!',priest:'Rise, hero!',escaped:'A hero escaped. He returns next wave as a veteran',removed:'Removed {name}, refunded {g} gold',max3:'Max 3 of the same trap. Mix it up',maxCap:'Max {n} traps. Tap a placed trap to remove it',noGold:'Not enough gold. {name} costs {n}',tooClose:'Too close to a hero',chainJump:'Long jump!',bonk:'Ouch, my head!',revived:'I\'m alive again!',scout:'{name} ahead, watch out!',sapper:'I can disarm this.',chestMine:'Treasure! It\'s mine!',slide:'Whoaaa, slippery—',ported:'Huh? Why am I back here?',disarmed:'Disarmed by a Sapper',blocked:'Clang! Blocked.',vets:'Veteran×{n}',tagNew:'New trap · {s}',cardTrapDesc:'{desc}. Now {n} gold each.',tagUpg:'Upgrade · {name}',tagItem:'Item',schoolProg:'{name} {n}/3',schoolReady:' ✓',exit:'EXIT',wave:'Wave {n}',gold:'Gold {n}',traps:'Traps {a}/{b}',intel:'Guild intel (what heroes know)',lives:'Escapes left',cost:'{n} gold',next:'Next wave: {s}',startIn:'Starts in {n}s · Space to start now',hint:'Pick a trap below and tap the floor · Draw a card after each wave · {a}/{b} traps unlocked',pickCard:'Wave {n} held! Pick a card',reroll:'Reroll ({n} gold)',lost:'Dungeon Fallen',lostStats:'Held {w} waves, trapped {k} heroes · Best: {b} waves',unlockProg:'Trap unlocks {a}/{b}',allUnlocked:'All traps unlocked!',tapRestart:'Tap to play again',goalLine:'{name}: {text}',revive:'Watch an ad to revive (+2 lives)',reviveFree:'Revive (+2 lives, no ad in test build)',restart:'Restart',reviveDone:'Revived! +2 lives',adFail:'Ad not finished, can\'t revive',rotate:'Please turn your phone sideways',title:'Trap the Hero'}
+ ui:{chapter:"Chapter {n}",ch1:"Rookie Dungeon",ch2:"Machine Vault",ch3:"Bounce Hall",ch4:"Flame Abyss",ch5:"Hero Guild",ch6:"Legend Dungeon",endless:"Endless Mode",endlessBest:"Best: wave {n}",endlessLock:"Endless Mode · Clear 1-5 to unlock",chLocked:"Clear {id} to unlock this chapter",lvLocked:"Clear the previous level first",lvTitle:"Level {id} · Hold {n} waves",waveOf:"Wave {n}/{m}",newTrapLv:"New trap: {name} · {desc}",r_cap:"Max {n} traps",r_poor:"No gold for kills · Bigger wave bonus",r_nodraft:"No card draws in this level",r_lives:"Only {n} heroes may escape",r_block:"Rubble: some tiles can't hold traps",r_affix:"Every wave · {a}",r_rand:"Random wave modifiers",r_boss:"Final wave: {name} ×{n}",blockedTile:"Rubble here. Can't build",homeConfirm:"Tap again to quit to the menu",winT:"Level {id} Clear!",winStats:"Trapped {k} heroes · {e} escaped",star3:"★★★: let no hero escape",lostLv:"Fell on wave {w}/{m} · Trapped {k} heroes",nextLv:"Next Level",retry:"Retry",menu:"Menu",allDone:"All 60 levels cleared!",unlockNew:'New trap unlocked: {name}! It can now appear in draws',gotTrap:'New trap: {name}',gotUpg:'Upgrade: {name}',schoolDone:'Build complete: {name} · {bonus}',rerollNoGold:'Not enough gold. Reroll costs {n}',newClass:'New class: {name} · {info}',affixNow:'Wave modifier · {a}',waveHeld:'Wave {n} held! +{g} gold',forgot:'Unused traps, the guild forgot: {list}',listSep:', ',broke:'{name} broke',bossTaunt:'Is that all?',tough:'Tough skin!',ah:'Argh!',priest:'Rise, hero!',escaped:'A hero escaped. He returns next wave as a veteran',removed:'Removed {name}, refunded {g} gold',max3:'Max 3 of the same trap. Mix it up',maxCap:'Max {n} traps. Tap a placed trap to remove it',noGold:'Not enough gold. {name} costs {n}',tooClose:'Too close to a hero',chainJump:'Long jump!',bonk:'Ouch, my head!',revived:'I\'m alive again!',scout:'{name} ahead, watch out!',sapper:'I can disarm this.',chestMine:'Treasure! It\'s mine!',slide:'Whoaaa, slippery—',ported:'Huh? Why am I back here?',disarmed:'Disarmed by a Sapper',blocked:'Clang! Blocked.',vets:'Veteran×{n}',tagNew:'New trap · {s}',cardTrapDesc:'{desc}. Now {n} gold each.',tagUpg:'Upgrade · {name}',tagItem:'Item',schoolProg:'{name} {n}/3',schoolReady:' ✓',exit:'EXIT',wave:'Wave {n}',gold:'Gold {n}',traps:'Traps {a}/{b}',intel:'Guild intel (what heroes know)',lives:'Escapes left',cost:'{n} gold',next:'Next wave: {s}',startIn:'Starts in {n}s · Space to start now',hint:'Pick a trap below and tap the floor · Draw a card after each wave · {a}/{b} traps unlocked',pickCard:'Wave {n} held! Pick a card',reroll:'Reroll ({n} gold)',lost:'Dungeon Fallen',lostStats:'Held {w} waves, trapped {k} heroes · Best: {b} waves',unlockProg:'Trap unlocks {a}/{b}',allUnlocked:'All traps unlocked!',tapRestart:'Tap to play again',goalLine:'{name}: {text}',revive:'Watch an ad to revive (+2 lives)',reviveFree:'Revive (+2 lives, no ad in test build)',restart:'Restart',reviveDone:'Revived! +2 lives',adFail:'Ad not finished, can\'t revive',rotate:'Please turn your phone sideways',title:'Trap the Hero'}
 },
 pt:{
  sch:{spike:['Build Espinhos','Espinho','Armadilhas de espinho +1 de durabilidade'],fall:['Build Queda','Queda','Alçapões ficam abertos 2s, Gelo e Portais +2 de durabilidade'],mech:['Build Máquina','Máquina','Flechas e Chamas mais rápidas, Gás mais letal'],heavy:['Build Peso','Peso','Pedras e Rochas devolvem metade do custo ao matar']},
@@ -82,7 +82,7 @@ pt:{
  dodge:['A guilda avisou sobre isso!','Já sabia!','Essa eu conheço~','Boa tentativa.','Está nas anotações da guilda.'],
  esc:['Só isso? Eu volto!','Fácil demais!','Volto com experiência!'],
  goal:{arrow:'Mate 10 heróis com Espinhos numa partida',rock:'Mate um herói abrindo um baú (3 no total)',boulder:'Sobreviva à onda 5',spring:'Mate 2 heróis de uma vez com uma armadilha',ice:'Ninguém escapa por 3 ondas seguidas (numa partida)',ceil:'Faça heróis baterem no teto (5 no total)',flame:'Mate Cavaleiros (5 no total)',portal:'Mate Veteranos (3 no total)',gas:'Sobreviva à onda 10'},
- ui:{unlockNew:'Armadilha desbloqueada: {name}! Agora pode aparecer nas cartas',gotTrap:'Nova armadilha: {name}',gotUpg:'Melhoria: {name}',schoolDone:'Build completa: {name} · {bonus}',rerollNoGold:'Ouro insuficiente. Trocar custa {n}',newClass:'Nova classe: {name} · {info}',affixNow:'Modificador da onda · {a}',waveHeld:'Onda {n} resistida! +{g} de ouro',forgot:'Armadilhas não usadas, a guilda esqueceu: {list}',listSep:', ',broke:'{name} quebrou',bossTaunt:'Só isso?',tough:'Casca grossa!',ah:'Argh!',priest:'Levante-se, herói!',escaped:'Um herói escapou. Volta na próxima onda como veterano',removed:'{name} removido, +{g} de ouro',max3:'Máximo de 3 da mesma armadilha. Varie!',maxCap:'Máximo de {n} armadilhas. Toque numa armadilha para remover',noGold:'Ouro insuficiente. {name} custa {n}',tooClose:'Perto demais de um herói',chainJump:'Pulo longo!',bonk:'Ai, minha cabeça!',revived:'Voltei à vida!',scout:'{name} à frente, cuidado!',sapper:'Isso eu desarmo.',chestMine:'Tesouro! É meu!',slide:'Uaaa, escorregando—',ported:'Hã? Por que voltei pra cá?',disarmed:'Desarmada por um Sapador',blocked:'Clang! Bloqueado.',vets:'Veterano×{n}',tagNew:'Nova armadilha · {s}',cardTrapDesc:'{desc}. Agora {n} de ouro cada.',tagUpg:'Melhoria · {name}',tagItem:'Item',schoolProg:'{name} {n}/3',schoolReady:' ✓',exit:'SAÍDA',wave:'Onda {n}',gold:'Ouro {n}',traps:'Armadilhas {a}/{b}',intel:'Informações da guilda',lives:'Fugas restantes',cost:'{n} ouro',next:'Próxima onda: {s}',startIn:'Começa em {n}s · Espaço para começar já',hint:'Escolha uma armadilha e toque no chão · Pegue uma carta a cada onda · {a}/{b} desbloqueadas',pickCard:'Onda {n} resistida! Escolha uma carta',reroll:'Trocar ({n} de ouro)',lost:'A Masmorra Caiu',lostStats:'Resistiu {w} ondas, pegou {k} heróis · Recorde: {b} ondas',unlockProg:'Armadilhas desbloqueadas {a}/{b}',allUnlocked:'Todas as armadilhas desbloqueadas!',tapRestart:'Toque para jogar de novo',goalLine:'{name}: {text}',revive:'Ver anúncio para reviver (+2 vidas)',reviveFree:'Reviver (+2 vidas, sem anúncio no teste)',restart:'Recomeçar',reviveDone:'Reviveu! +2 vidas',adFail:'O anúncio não terminou, não dá para reviver',rotate:'Gire o celular para a horizontal',title:'Armadilha pro Herói'}
+ ui:{chapter:"Capítulo {n}",ch1:"Masmorra Novata",ch2:"Cofre das Máquinas",ch3:"Salão dos Saltos",ch4:"Abismo de Fogo",ch5:"Guilda dos Heróis",ch6:"Masmorra Lendária",endless:"Modo Infinito",endlessBest:"Recorde: onda {n}",endlessLock:"Modo Infinito · Vença a 1-5 para liberar",chLocked:"Vença a {id} para liberar este capítulo",lvLocked:"Vença a fase anterior primeiro",lvTitle:"Fase {id} · Resista {n} ondas",waveOf:"Onda {n}/{m}",newTrapLv:"Nova armadilha: {name} · {desc}",r_cap:"Máximo de {n} armadilhas",r_poor:"Sem ouro por abate · Bônus maior por onda",r_nodraft:"Sem cartas nesta fase",r_lives:"Só {n} heróis podem escapar",r_block:"Entulho: alguns espaços não aceitam armadilhas",r_affix:"Toda onda · {a}",r_rand:"Modificadores aleatórios",r_boss:"Última onda: {name} ×{n}",blockedTile:"Tem entulho aqui. Não dá para construir",homeConfirm:"Toque de novo para voltar ao menu",winT:"Fase {id} concluída!",winStats:"Pegou {k} heróis · {e} escaparam",star3:"★★★: não deixe nenhum herói escapar",lostLv:"Caiu na onda {w}/{m} · Pegou {k} heróis",nextLv:"Próxima fase",retry:"Tentar de novo",menu:"Menu",allDone:"Todas as 60 fases concluídas!",unlockNew:'Armadilha desbloqueada: {name}! Agora pode aparecer nas cartas',gotTrap:'Nova armadilha: {name}',gotUpg:'Melhoria: {name}',schoolDone:'Build completa: {name} · {bonus}',rerollNoGold:'Ouro insuficiente. Trocar custa {n}',newClass:'Nova classe: {name} · {info}',affixNow:'Modificador da onda · {a}',waveHeld:'Onda {n} resistida! +{g} de ouro',forgot:'Armadilhas não usadas, a guilda esqueceu: {list}',listSep:', ',broke:'{name} quebrou',bossTaunt:'Só isso?',tough:'Casca grossa!',ah:'Argh!',priest:'Levante-se, herói!',escaped:'Um herói escapou. Volta na próxima onda como veterano',removed:'{name} removido, +{g} de ouro',max3:'Máximo de 3 da mesma armadilha. Varie!',maxCap:'Máximo de {n} armadilhas. Toque numa armadilha para remover',noGold:'Ouro insuficiente. {name} custa {n}',tooClose:'Perto demais de um herói',chainJump:'Pulo longo!',bonk:'Ai, minha cabeça!',revived:'Voltei à vida!',scout:'{name} à frente, cuidado!',sapper:'Isso eu desarmo.',chestMine:'Tesouro! É meu!',slide:'Uaaa, escorregando—',ported:'Hã? Por que voltei pra cá?',disarmed:'Desarmada por um Sapador',blocked:'Clang! Bloqueado.',vets:'Veterano×{n}',tagNew:'Nova armadilha · {s}',cardTrapDesc:'{desc}. Agora {n} de ouro cada.',tagUpg:'Melhoria · {name}',tagItem:'Item',schoolProg:'{name} {n}/3',schoolReady:' ✓',exit:'SAÍDA',wave:'Onda {n}',gold:'Ouro {n}',traps:'Armadilhas {a}/{b}',intel:'Informações da guilda',lives:'Fugas restantes',cost:'{n} ouro',next:'Próxima onda: {s}',startIn:'Começa em {n}s · Espaço para começar já',hint:'Escolha uma armadilha e toque no chão · Pegue uma carta a cada onda · {a}/{b} desbloqueadas',pickCard:'Onda {n} resistida! Escolha uma carta',reroll:'Trocar ({n} de ouro)',lost:'A Masmorra Caiu',lostStats:'Resistiu {w} ondas, pegou {k} heróis · Recorde: {b} ondas',unlockProg:'Armadilhas desbloqueadas {a}/{b}',allUnlocked:'Todas as armadilhas desbloqueadas!',tapRestart:'Toque para jogar de novo',goalLine:'{name}: {text}',revive:'Ver anúncio para reviver (+2 vidas)',reviveFree:'Reviver (+2 vidas, sem anúncio no teste)',restart:'Recomeçar',reviveDone:'Reviveu! +2 vidas',adFail:'O anúncio não terminou, não dá para reviver',rotate:'Gire o celular para a horizontal',title:'Armadilha pro Herói'}
 },
 es:{
  sch:{spike:['Build Pinchos','Pincho','Trampas de pinchos +1 de durabilidad'],fall:['Build Caída','Caída','Las trampillas siguen abiertas 2s, Hielo y Portales +2 de durabilidad'],mech:['Build Máquina','Máquina','Flechas y Llamas más rápidas, Gas más letal'],heavy:['Build Peso','Peso','Rocas y Pedruscos devuelven la mitad del coste al matar']},
@@ -95,7 +95,7 @@ es:{
  dodge:['¡El gremio nos avisó de esto!','¡Lo vi venir!','Esta me la sé~','Buen intento.','Está en las notas del gremio.'],
  esc:['¿Eso es todo? ¡Volveré!','¡Demasiado fácil!','¡Volveré con experiencia!'],
  goal:{arrow:'Mata 10 héroes con Pinchos en una partida',rock:'Mata a un héroe mientras abre un cofre (3 en total)',boulder:'Sobrevive a la oleada 5',spring:'Mata 2 héroes a la vez con una trampa',ice:'Que nadie escape 3 oleadas seguidas (en una partida)',ceil:'Haz que los héroes choquen con el techo (5 en total)',flame:'Mata Caballeros (5 en total)',portal:'Mata Veteranos (3 en total)',gas:'Sobrevive a la oleada 10'},
- ui:{unlockNew:'¡Trampa desbloqueada: {name}! Ya puede salir en las cartas',gotTrap:'Nueva trampa: {name}',gotUpg:'Mejora: {name}',schoolDone:'Build completa: {name} · {bonus}',rerollNoGold:'Oro insuficiente. Cambiar cuesta {n}',newClass:'Nueva clase: {name} · {info}',affixNow:'Modificador de oleada · {a}',waveHeld:'¡Oleada {n} resistida! +{g} de oro',forgot:'Trampas sin usar, el gremio las olvidó: {list}',listSep:', ',broke:'{name} se rompió',bossTaunt:'¿Eso es todo?',tough:'¡Piel dura!',ah:'¡Argh!',priest:'¡Levántate, héroe!',escaped:'Un héroe escapó. Vuelve en la próxima oleada como veterano',removed:'{name} retirado, +{g} de oro',max3:'Máximo 3 de la misma trampa. ¡Varía!',maxCap:'Máximo {n} trampas. Toca una trampa para quitarla',noGold:'Oro insuficiente. {name} cuesta {n}',tooClose:'Demasiado cerca de un héroe',chainJump:'¡Salto largo!',bonk:'¡Ay, mi cabeza!',revived:'¡He vuelto a la vida!',scout:'¡{name} delante, cuidado!',sapper:'Esto lo desarmo yo.',chestMine:'¡Tesoro! ¡Es mío!',slide:'¡Uaaa, resbala—',ported:'¿Eh? ¿Por qué estoy aquí otra vez?',disarmed:'Desarmada por un Zapador',blocked:'¡Clang! Bloqueado.',vets:'Veterano×{n}',tagNew:'Nueva trampa · {s}',cardTrapDesc:'{desc}. Ahora {n} de oro cada una.',tagUpg:'Mejora · {name}',tagItem:'Objeto',schoolProg:'{name} {n}/3',schoolReady:' ✓',exit:'SALIDA',wave:'Oleada {n}',gold:'Oro {n}',traps:'Trampas {a}/{b}',intel:'Info del gremio',lives:'Fugas restantes',cost:'{n} oro',next:'Próxima oleada: {s}',startIn:'Empieza en {n}s · Espacio para empezar ya',hint:'Elige una trampa y toca el suelo · Coge una carta tras cada oleada · {a}/{b} desbloqueadas',pickCard:'¡Oleada {n} resistida! Elige una carta',reroll:'Cambiar ({n} de oro)',lost:'La Mazmorra Cayó',lostStats:'Resististe {w} oleadas, atrapaste {k} héroes · Récord: {b} oleadas',unlockProg:'Trampas desbloqueadas {a}/{b}',allUnlocked:'¡Todas las trampas desbloqueadas!',tapRestart:'Toca para jugar otra vez',goalLine:'{name}: {text}',revive:'Ver anuncio para revivir (+2 vidas)',reviveFree:'Revivir (+2 vidas, sin anuncio en prueba)',restart:'Reiniciar',reviveDone:'¡Revivido! +2 vidas',adFail:'El anuncio no terminó, no puedes revivir',rotate:'Gira el móvil en horizontal',title:'Trampa al Héroe'}
+ ui:{chapter:"Capítulo {n}",ch1:"Mazmorra Novata",ch2:"Cámara de Máquinas",ch3:"Salón de Rebotes",ch4:"Abismo de Fuego",ch5:"Gremio de Héroes",ch6:"Mazmorra Legendaria",endless:"Modo Infinito",endlessBest:"Récord: oleada {n}",endlessLock:"Modo Infinito · Supera el 1-5 para desbloquear",chLocked:"Supera el {id} para desbloquear este capítulo",lvLocked:"Supera el nivel anterior primero",lvTitle:"Nivel {id} · Resiste {n} oleadas",waveOf:"Oleada {n}/{m}",newTrapLv:"Nueva trampa: {name} · {desc}",r_cap:"Máximo {n} trampas",r_poor:"Sin oro por eliminar · Más bonus por oleada",r_nodraft:"Sin cartas en este nivel",r_lives:"Solo pueden escapar {n} héroes",r_block:"Escombros: algunas casillas no admiten trampas",r_affix:"Cada oleada · {a}",r_rand:"Modificadores aleatorios",r_boss:"Última oleada: {name} ×{n}",blockedTile:"Hay escombros. No se puede construir",homeConfirm:"Toca otra vez para volver al menú",winT:"¡Nivel {id} superado!",winStats:"Atrapaste {k} héroes · escaparon {e}",star3:"★★★: que no escape ningún héroe",lostLv:"Caíste en la oleada {w}/{m} · Atrapaste {k} héroes",nextLv:"Siguiente nivel",retry:"Reintentar",menu:"Menú",allDone:"¡Superaste los 60 niveles!",unlockNew:'¡Trampa desbloqueada: {name}! Ya puede salir en las cartas',gotTrap:'Nueva trampa: {name}',gotUpg:'Mejora: {name}',schoolDone:'Build completa: {name} · {bonus}',rerollNoGold:'Oro insuficiente. Cambiar cuesta {n}',newClass:'Nueva clase: {name} · {info}',affixNow:'Modificador de oleada · {a}',waveHeld:'¡Oleada {n} resistida! +{g} de oro',forgot:'Trampas sin usar, el gremio las olvidó: {list}',listSep:', ',broke:'{name} se rompió',bossTaunt:'¿Eso es todo?',tough:'¡Piel dura!',ah:'¡Argh!',priest:'¡Levántate, héroe!',escaped:'Un héroe escapó. Vuelve en la próxima oleada como veterano',removed:'{name} retirado, +{g} de oro',max3:'Máximo 3 de la misma trampa. ¡Varía!',maxCap:'Máximo {n} trampas. Toca una trampa para quitarla',noGold:'Oro insuficiente. {name} cuesta {n}',tooClose:'Demasiado cerca de un héroe',chainJump:'¡Salto largo!',bonk:'¡Ay, mi cabeza!',revived:'¡He vuelto a la vida!',scout:'¡{name} delante, cuidado!',sapper:'Esto lo desarmo yo.',chestMine:'¡Tesoro! ¡Es mío!',slide:'¡Uaaa, resbala—',ported:'¿Eh? ¿Por qué estoy aquí otra vez?',disarmed:'Desarmada por un Zapador',blocked:'¡Clang! Bloqueado.',vets:'Veterano×{n}',tagNew:'Nueva trampa · {s}',cardTrapDesc:'{desc}. Ahora {n} de oro cada una.',tagUpg:'Mejora · {name}',tagItem:'Objeto',schoolProg:'{name} {n}/3',schoolReady:' ✓',exit:'SALIDA',wave:'Oleada {n}',gold:'Oro {n}',traps:'Trampas {a}/{b}',intel:'Info del gremio',lives:'Fugas restantes',cost:'{n} oro',next:'Próxima oleada: {s}',startIn:'Empieza en {n}s · Espacio para empezar ya',hint:'Elige una trampa y toca el suelo · Coge una carta tras cada oleada · {a}/{b} desbloqueadas',pickCard:'¡Oleada {n} resistida! Elige una carta',reroll:'Cambiar ({n} de oro)',lost:'La Mazmorra Cayó',lostStats:'Resististe {w} oleadas, atrapaste {k} héroes · Récord: {b} oleadas',unlockProg:'Trampas desbloqueadas {a}/{b}',allUnlocked:'¡Todas las trampas desbloqueadas!',tapRestart:'Toca para jugar otra vez',goalLine:'{name}: {text}',revive:'Ver anuncio para revivir (+2 vidas)',reviveFree:'Revivir (+2 vidas, sin anuncio en prueba)',restart:'Reiniciar',reviveDone:'¡Revivido! +2 vidas',adFail:'El anuncio no terminó, no puedes revivir',rotate:'Gira el móvil en horizontal',title:'Trampa al Héroe'}
 },
 ja:{
  sch:{spike:['トゲ型','トゲ','トゲ系トラップの耐久+1'],fall:['落下型','落下','落とし穴は2秒開いたまま、氷とポータルの耐久+2'],mech:['からくり型','からくり','矢と炎が速くなり、毒ガスが強くなる'],heavy:['重量型','重量','落石と大岩で倒すと費用の半分が戻る']},
@@ -108,7 +108,7 @@ ja:{
  dodge:['ギルドで聞いた手だ！','お見通しだ！','知ってるよ〜','その手には乗らない。','情報にあったぞ。'],
  esc:['それだけ？また来るぞ！','楽勝だ！','経験を積んで戻ってくる！'],
  goal:{arrow:'1回のプレイでトゲ床で10人倒す',rock:'宝箱を開けている勇者を倒す（累計3回）',boulder:'第5ウェーブを守り切る',spring:'1つの罠で同時に2人倒す',ice:'1回のプレイで3ウェーブ連続で誰も逃がさない',ceil:'勇者を天井にぶつける（累計5回）',flame:'盾騎士を倒す（累計5人）',portal:'ベテランを倒す（累計3人）',gas:'第10ウェーブを守り切る'},
- ui:{unlockNew:'新しい罠を解放：{name}！ 抽選に出るようになった',gotTrap:'新しい罠：{name}',gotUpg:'強化：{name}',schoolDone:'ビルド完成：{name} · {bonus}',rerollNoGold:'ゴールド不足。引き直しは{n}',newClass:'新職業：{name} · {info}',affixNow:'ウェーブ効果 · {a}',waveHeld:'第{n}ウェーブ防衛！ +{g}ゴールド',forgot:'使わなかった罠をギルドが忘れた：{list}',listSep:'、',broke:'{name}が壊れた',bossTaunt:'その程度か？',tough:'皮が厚いぜ！',ah:'ぐわっ！',priest:'立て、勇者よ！',escaped:'勇者が逃げた。次のウェーブでベテランとして戻ってくる',removed:'{name}を撤去、{g}ゴールド返却',max3:'同じ罠は3つまで。組み合わせを変えよう',maxCap:'罠は最大{n}個。置いた罠をタップで撤去',noGold:'ゴールド不足。{name}は{n}',tooClose:'勇者に近すぎる',chainJump:'大ジャンプ！',bonk:'いてっ、頭が！',revived:'生き返った！',scout:'前方に{name}、気をつけろ！',sapper:'これは解除できる。',chestMine:'宝箱だ！いただき！',slide:'うわぁ、滑る——',ported:'あれ？なんで戻ってるの',disarmed:'工兵に解除された',blocked:'カキン！防いだ。',vets:'ベテラン×{n}',tagNew:'新しい罠 · {s}',cardTrapDesc:'{desc}。現在1個{n}ゴールド。',tagUpg:'強化 · {name}',tagItem:'アイテム',schoolProg:'{name} {n}/3',schoolReady:' ✓',exit:'出口',wave:'第{n}ウェーブ',gold:'ゴールド {n}',traps:'罠 {a}/{b}',intel:'ギルド情報（勇者の知識）',lives:'逃がせる数',cost:'{n}ゴールド',next:'次のウェーブ：{s}',startIn:'{n}秒後に開始 · スペースですぐ開始',hint:'下の罠を選んで床をタップ · ウェーブごとにカードを引ける · 解放済み {a}/{b}',pickCard:'第{n}ウェーブ防衛！カードを選ぼう',reroll:'引き直し（{n}ゴールド）',lost:'ダンジョン陥落',lostStats:'{w}ウェーブ防衛、勇者{k}人を撃退 · 最高 {b}ウェーブ',unlockProg:'罠の解放 {a}/{b}',allUnlocked:'すべての罠を解放した！',tapRestart:'タップでもう一度',goalLine:'{name}：{text}',revive:'広告を見て復活（命+2）',reviveFree:'復活（命+2、テスト版は広告なし）',restart:'やり直す',reviveDone:'復活！命+2',adFail:'広告が最後まで再生されず、復活できない',rotate:'スマホを横向きにしてください',title:'勇者ハメ'}
+ ui:{chapter:"第{n}章",ch1:"初心者ダンジョン",ch2:"からくり部屋",ch3:"はずむ回廊",ch4:"炎の深淵",ch5:"勇者ギルド",ch6:"伝説のダンジョン",endless:"エンドレス",endlessBest:"最高 {n} ウェーブ",endlessLock:"エンドレス · 1-5 クリアで解放",chLocked:"{id} をクリアすると解放",lvLocked:"前のステージをクリアしてね",lvTitle:"ステージ {id} · {n} ウェーブ守れ",waveOf:"ウェーブ {n}/{m}",newTrapLv:"新しい罠：{name} · {desc}",r_cap:"罠は最大 {n} 個",r_poor:"撃破でゴールドなし · ウェーブ報酬アップ",r_nodraft:"このステージはカードなし",r_lives:"逃がせるのは {n} 人まで",r_block:"がれき：置けないマスがある",r_affix:"全ウェーブ · {a}",r_rand:"ランダムな特殊効果",r_boss:"最終ウェーブ：{name} ×{n}",blockedTile:"がれきがあって置けない",homeConfirm:"もう一度タップでメニューへ",winT:"ステージ {id} クリア！",winStats:"{k} 人撃破 · {e} 人逃走",star3:"★★★：1人も逃がさない",lostLv:"ウェーブ {w}/{m} で陥落 · {k} 人撃破",nextLv:"次のステージ",retry:"リトライ",menu:"メニュー",allDone:"全60ステージクリア！",unlockNew:'新しい罠を解放：{name}！ 抽選に出るようになった',gotTrap:'新しい罠：{name}',gotUpg:'強化：{name}',schoolDone:'ビルド完成：{name} · {bonus}',rerollNoGold:'ゴールド不足。引き直しは{n}',newClass:'新職業：{name} · {info}',affixNow:'ウェーブ効果 · {a}',waveHeld:'第{n}ウェーブ防衛！ +{g}ゴールド',forgot:'使わなかった罠をギルドが忘れた：{list}',listSep:'、',broke:'{name}が壊れた',bossTaunt:'その程度か？',tough:'皮が厚いぜ！',ah:'ぐわっ！',priest:'立て、勇者よ！',escaped:'勇者が逃げた。次のウェーブでベテランとして戻ってくる',removed:'{name}を撤去、{g}ゴールド返却',max3:'同じ罠は3つまで。組み合わせを変えよう',maxCap:'罠は最大{n}個。置いた罠をタップで撤去',noGold:'ゴールド不足。{name}は{n}',tooClose:'勇者に近すぎる',chainJump:'大ジャンプ！',bonk:'いてっ、頭が！',revived:'生き返った！',scout:'前方に{name}、気をつけろ！',sapper:'これは解除できる。',chestMine:'宝箱だ！いただき！',slide:'うわぁ、滑る——',ported:'あれ？なんで戻ってるの',disarmed:'工兵に解除された',blocked:'カキン！防いだ。',vets:'ベテラン×{n}',tagNew:'新しい罠 · {s}',cardTrapDesc:'{desc}。現在1個{n}ゴールド。',tagUpg:'強化 · {name}',tagItem:'アイテム',schoolProg:'{name} {n}/3',schoolReady:' ✓',exit:'出口',wave:'第{n}ウェーブ',gold:'ゴールド {n}',traps:'罠 {a}/{b}',intel:'ギルド情報（勇者の知識）',lives:'逃がせる数',cost:'{n}ゴールド',next:'次のウェーブ：{s}',startIn:'{n}秒後に開始 · スペースですぐ開始',hint:'下の罠を選んで床をタップ · ウェーブごとにカードを引ける · 解放済み {a}/{b}',pickCard:'第{n}ウェーブ防衛！カードを選ぼう',reroll:'引き直し（{n}ゴールド）',lost:'ダンジョン陥落',lostStats:'{w}ウェーブ防衛、勇者{k}人を撃退 · 最高 {b}ウェーブ',unlockProg:'罠の解放 {a}/{b}',allUnlocked:'すべての罠を解放した！',tapRestart:'タップでもう一度',goalLine:'{name}：{text}',revive:'広告を見て復活（命+2）',reviveFree:'復活（命+2、テスト版は広告なし）',restart:'やり直す',reviveDone:'復活！命+2',adFail:'広告が最後まで再生されず、復活できない',rotate:'スマホを横向きにしてください',title:'勇者ハメ'}
 },
 hi:{
  sch:{spike:['काँटा बिल्ड','काँटा','काँटे वाले जाल +1 टिकाऊपन'],fall:['गिरावट बिल्ड','गिरावट','चोर दरवाज़ा 2 सेकंड खुला रहता है, बर्फ़ और पोर्टल +2 टिकाऊपन'],mech:['मशीन बिल्ड','मशीन','तीर और आग तेज़, ज़हरीली गैस ज़्यादा घातक'],heavy:['भारी बिल्ड','भारी','पत्थर और शिला से मारने पर आधी कीमत वापस']},
@@ -121,7 +121,7 @@ hi:{
  dodge:['संघ ने इसके बारे में बताया था!','पहले ही समझ गया!','ये तो मुझे पता है~','अच्छी कोशिश।','संघ की सूचना में है।'],
  esc:['बस इतना? मैं वापस आऊँगा!','बहुत आसान!','अनुभव लेकर लौटूँगा!'],
  goal:{arrow:'एक खेल में काँटों से 10 हीरो मारें',rock:'संदूक खोलते हीरो को मारें (कुल 3 बार)',boulder:'लहर 5 तक टिके रहें',spring:'एक जाल से एक साथ 2 हीरो मारें',ice:'एक खेल में लगातार 3 लहरों तक किसी को न भागने दें',ceil:'हीरो को छत से टकराएँ (कुल 5 बार)',flame:'ढाल योद्धा मारें (कुल 5)',portal:'अनुभवी मारें (कुल 3)',gas:'लहर 10 तक टिके रहें'},
- ui:{unlockNew:'नया जाल खुला: {name}! अब यह कार्डों में आ सकता है',gotTrap:'नया जाल: {name}',gotUpg:'अपग्रेड: {name}',schoolDone:'बिल्ड पूरा: {name} · {bonus}',rerollNoGold:'सोना कम है। बदलने का दाम {n}',newClass:'नई श्रेणी: {name} · {info}',affixNow:'लहर का असर · {a}',waveHeld:'लहर {n} रोकी! +{g} सोना',forgot:'न इस्तेमाल हुए जाल संघ भूल गया: {list}',listSep:', ',broke:'{name} टूट गया',bossTaunt:'बस इतना ही?',tough:'मोटी चमड़ी!',ah:'आह!',priest:'उठो, हीरो!',escaped:'एक हीरो भाग गया। अगली लहर में अनुभवी बनकर लौटेगा',removed:'{name} हटाया, {g} सोना वापस',max3:'एक तरह के जाल अधिकतम 3। कुछ अलग आज़माएँ',maxCap:'अधिकतम {n} जाल। हटाने के लिए जाल पर टैप करें',noGold:'सोना कम है। {name} का दाम {n}',tooClose:'हीरो के बहुत पास',chainJump:'लंबी छलाँग!',bonk:'उफ़, मेरा सिर!',revived:'मैं फिर ज़िंदा हूँ!',scout:'आगे {name} है, सावधान!',sapper:'इसे मैं तोड़ सकता हूँ।',chestMine:'खज़ाना! मेरा है!',slide:'अरे, फिसल रहा—',ported:'हैं? मैं वापस यहाँ कैसे?',disarmed:'सैपर ने तोड़ दिया',blocked:'टन! रोक लिया।',vets:'अनुभवी×{n}',tagNew:'नया जाल · {s}',cardTrapDesc:'{desc}। अभी {n} सोना प्रति जाल।',tagUpg:'अपग्रेड · {name}',tagItem:'वस्तु',schoolProg:'{name} {n}/3',schoolReady:' ✓',exit:'निकास',wave:'लहर {n}',gold:'सोना {n}',traps:'जाल {a}/{b}',intel:'संघ की सूचना',lives:'भागने की छूट',cost:'{n} सोना',next:'अगली लहर: {s}',startIn:'{n} सेकंड में शुरू · अभी शुरू करने के लिए स्पेस',hint:'नीचे से जाल चुनें, फ़र्श पर टैप करें · हर लहर के बाद कार्ड लें · खुले जाल {a}/{b}',pickCard:'लहर {n} रोकी! एक कार्ड चुनें',reroll:'बदलें ({n} सोना)',lost:'कालकोठरी गिर गई',lostStats:'{w} लहरें रोकीं, {k} हीरो फँसाए · सर्वश्रेष्ठ: {b} लहरें',unlockProg:'जाल खुले {a}/{b}',allUnlocked:'सारे जाल खुल गए!',tapRestart:'फिर खेलने के लिए टैप करें',goalLine:'{name}: {text}',revive:'विज्ञापन देखकर फिर जिएँ (+2 जान)',reviveFree:'फिर जिएँ (+2 जान, टेस्ट में विज्ञापन नहीं)',restart:'फिर शुरू करें',reviveDone:'फिर ज़िंदा! +2 जान',adFail:'विज्ञापन पूरा नहीं हुआ',rotate:'कृपया फ़ोन को आड़ा करें',title:'हीरो को फँसाओ'}
+ ui:{chapter:"अध्याय {n}",ch1:"नौसिखिया कालकोठरी",ch2:"मशीनों का तहख़ाना",ch3:"उछाल गलियारा",ch4:"आग की खाई",ch5:"नायक संघ",ch6:"महान कालकोठरी",endless:"अंतहीन मोड",endlessBest:"सर्वश्रेष्ठ: लहर {n}",endlessLock:"अंतहीन मोड · खोलने के लिए 1-5 पार करें",chLocked:"यह अध्याय खोलने के लिए {id} पार करें",lvLocked:"पहले पिछला लेवल पार करें",lvTitle:"लेवल {id} · {n} लहरें रोकें",waveOf:"लहर {n}/{m}",newTrapLv:"नया जाल: {name} · {desc}",r_cap:"अधिकतम {n} जाल",r_poor:"मारने पर सोना नहीं · लहर बोनस ज़्यादा",r_nodraft:"इस लेवल में कार्ड नहीं",r_lives:"सिर्फ़ {n} नायक भाग सकते हैं",r_block:"मलबा: कुछ खानों पर जाल नहीं लगेगा",r_affix:"हर लहर · {a}",r_rand:"हर लहर में रैंडम बदलाव",r_boss:"आख़िरी लहर: {name} ×{n}",blockedTile:"यहाँ मलबा है, जाल नहीं लगेगा",homeConfirm:"मेनू पर जाने के लिए फिर टैप करें",winT:"लेवल {id} पार!",winStats:"{k} नायक फँसे · {e} भागे",star3:"★★★: एक भी नायक न भागे",lostLv:"लहर {w}/{m} पर गिरे · {k} नायक फँसे",nextLv:"अगला लेवल",retry:"फिर कोशिश",menu:"मेनू",allDone:"सभी 60 लेवल पार!",unlockNew:'नया जाल खुला: {name}! अब यह कार्डों में आ सकता है',gotTrap:'नया जाल: {name}',gotUpg:'अपग्रेड: {name}',schoolDone:'बिल्ड पूरा: {name} · {bonus}',rerollNoGold:'सोना कम है। बदलने का दाम {n}',newClass:'नई श्रेणी: {name} · {info}',affixNow:'लहर का असर · {a}',waveHeld:'लहर {n} रोकी! +{g} सोना',forgot:'न इस्तेमाल हुए जाल संघ भूल गया: {list}',listSep:', ',broke:'{name} टूट गया',bossTaunt:'बस इतना ही?',tough:'मोटी चमड़ी!',ah:'आह!',priest:'उठो, हीरो!',escaped:'एक हीरो भाग गया। अगली लहर में अनुभवी बनकर लौटेगा',removed:'{name} हटाया, {g} सोना वापस',max3:'एक तरह के जाल अधिकतम 3। कुछ अलग आज़माएँ',maxCap:'अधिकतम {n} जाल। हटाने के लिए जाल पर टैप करें',noGold:'सोना कम है। {name} का दाम {n}',tooClose:'हीरो के बहुत पास',chainJump:'लंबी छलाँग!',bonk:'उफ़, मेरा सिर!',revived:'मैं फिर ज़िंदा हूँ!',scout:'आगे {name} है, सावधान!',sapper:'इसे मैं तोड़ सकता हूँ।',chestMine:'खज़ाना! मेरा है!',slide:'अरे, फिसल रहा—',ported:'हैं? मैं वापस यहाँ कैसे?',disarmed:'सैपर ने तोड़ दिया',blocked:'टन! रोक लिया।',vets:'अनुभवी×{n}',tagNew:'नया जाल · {s}',cardTrapDesc:'{desc}। अभी {n} सोना प्रति जाल।',tagUpg:'अपग्रेड · {name}',tagItem:'वस्तु',schoolProg:'{name} {n}/3',schoolReady:' ✓',exit:'निकास',wave:'लहर {n}',gold:'सोना {n}',traps:'जाल {a}/{b}',intel:'संघ की सूचना',lives:'भागने की छूट',cost:'{n} सोना',next:'अगली लहर: {s}',startIn:'{n} सेकंड में शुरू · अभी शुरू करने के लिए स्पेस',hint:'नीचे से जाल चुनें, फ़र्श पर टैप करें · हर लहर के बाद कार्ड लें · खुले जाल {a}/{b}',pickCard:'लहर {n} रोकी! एक कार्ड चुनें',reroll:'बदलें ({n} सोना)',lost:'कालकोठरी गिर गई',lostStats:'{w} लहरें रोकीं, {k} हीरो फँसाए · सर्वश्रेष्ठ: {b} लहरें',unlockProg:'जाल खुले {a}/{b}',allUnlocked:'सारे जाल खुल गए!',tapRestart:'फिर खेलने के लिए टैप करें',goalLine:'{name}: {text}',revive:'विज्ञापन देखकर फिर जिएँ (+2 जान)',reviveFree:'फिर जिएँ (+2 जान, टेस्ट में विज्ञापन नहीं)',restart:'फिर शुरू करें',reviveDone:'फिर ज़िंदा! +2 जान',adFail:'विज्ञापन पूरा नहीं हुआ',rotate:'कृपया फ़ोन को आड़ा करें',title:'हीरो को फँसाओ'}
 },
 bn:{
  sch:{spike:['কাঁটা বিল্ড','কাঁটা','কাঁটার ফাঁদ +1 স্থায়িত্ব'],fall:['পতন বিল্ড','পতন','গুপ্ত দরজা 2 সেকেন্ড খোলা থাকে, বরফ ও পোর্টাল +2 স্থায়িত্ব'],mech:['যন্ত্র বিল্ড','যন্ত্র','তীর ও আগুন দ্রুত, বিষাক্ত গ্যাস আরও মারাত্মক'],heavy:['ভারী বিল্ড','ভারী','পাথর ও গড়ানো পাথরে মারলে অর্ধেক দাম ফেরত']},
@@ -134,11 +134,11 @@ bn:{
  dodge:['সংঘ এটার কথা বলেছিল!','আগেই বুঝেছি!','এটা আমি জানি~','ভালো চেষ্টা।','সংঘের খবরে আছে।'],
  esc:['এইটুকুই? আবার আসব!','খুব সহজ!','অভিজ্ঞতা নিয়ে ফিরব!'],
  goal:{arrow:'এক খেলায় কাঁটা দিয়ে 10 জন বীর মারুন',rock:'সিন্দুক খোলার সময় বীর মারুন (মোট 3 বার)',boulder:'ঢেউ 5 পর্যন্ত টিকে থাকুন',spring:'এক ফাঁদে একসাথে 2 জন মারুন',ice:'এক খেলায় টানা 3 ঢেউ কাউকে পালাতে দেবেন না',ceil:'বীরকে ছাদে ধাক্কা খাওয়ান (মোট 5 বার)',flame:'ঢাল যোদ্ধা মারুন (মোট 5)',portal:'অভিজ্ঞ বীর মারুন (মোট 3)',gas:'ঢেউ 10 পর্যন্ত টিকে থাকুন'},
- ui:{unlockNew:'নতুন ফাঁদ খুলল: {name}! এখন কার্ডে আসতে পারে',gotTrap:'নতুন ফাঁদ: {name}',gotUpg:'আপগ্রেড: {name}',schoolDone:'বিল্ড সম্পূর্ণ: {name} · {bonus}',rerollNoGold:'সোনা কম। বদলাতে লাগবে {n}',newClass:'নতুন শ্রেণি: {name} · {info}',affixNow:'ঢেউয়ের প্রভাব · {a}',waveHeld:'ঢেউ {n} ঠেকানো গেল! +{g} সোনা',forgot:'অব্যবহৃত ফাঁদ সংঘ ভুলে গেছে: {list}',listSep:', ',broke:'{name} ভেঙে গেছে',bossTaunt:'এইটুকুই?',tough:'মোটা চামড়া!',ah:'আহ!',priest:'ওঠো, বীর!',escaped:'একজন বীর পালিয়েছে। পরের ঢেউয়ে অভিজ্ঞ হয়ে ফিরবে',removed:'{name} সরানো হলো, {g} সোনা ফেরত',max3:'একই ফাঁদ সর্বোচ্চ 3টি। অন্যরকম চেষ্টা করুন',maxCap:'সর্বোচ্চ {n}টি ফাঁদ। সরাতে ফাঁদে ট্যাপ করুন',noGold:'সোনা কম। {name}-এর দাম {n}',tooClose:'বীরের খুব কাছে',chainJump:'লম্বা লাফ!',bonk:'উফ, আমার মাথা!',revived:'আমি আবার বেঁচে উঠেছি!',scout:'সামনে {name}, সাবধান!',sapper:'এটা আমি নষ্ট করতে পারি।',chestMine:'গুপ্তধন! আমার!',slide:'ওরে, পিছলে যাচ্ছি—',ported:'অ্যাঁ? আমি আবার এখানে কেন?',disarmed:'স্যাপার নষ্ট করে দিয়েছে',blocked:'ঠং! আটকে দিলাম।',vets:'অভিজ্ঞ×{n}',tagNew:'নতুন ফাঁদ · {s}',cardTrapDesc:'{desc}। এখন প্রতিটি {n} সোনা।',tagUpg:'আপগ্রেড · {name}',tagItem:'জিনিস',schoolProg:'{name} {n}/3',schoolReady:' ✓',exit:'প্রস্থান',wave:'ঢেউ {n}',gold:'সোনা {n}',traps:'ফাঁদ {a}/{b}',intel:'সংঘের তথ্য',lives:'পালানোর সুযোগ',cost:'{n} সোনা',next:'পরের ঢেউ: {s}',startIn:'{n} সেকেন্ডে শুরু · এখনই শুরু করতে স্পেস',hint:'নিচ থেকে ফাঁদ বেছে মেঝেতে ট্যাপ করুন · প্রতি ঢেউয়ের পর কার্ড নিন · খোলা ফাঁদ {a}/{b}',pickCard:'ঢেউ {n} ঠেকানো গেল! একটা কার্ড নিন',reroll:'বদলান ({n} সোনা)',lost:'অন্ধকূপের পতন',lostStats:'{w} ঢেউ ঠেকানো, {k} জন বীর ফাঁদে · সেরা: {b} ঢেউ',unlockProg:'খোলা ফাঁদ {a}/{b}',allUnlocked:'সব ফাঁদ খোলা হয়েছে!',tapRestart:'আবার খেলতে ট্যাপ করুন',goalLine:'{name}: {text}',revive:'বিজ্ঞাপন দেখে আবার বাঁচুন (+2 জীবন)',reviveFree:'আবার বাঁচুন (+2 জীবন, টেস্টে বিজ্ঞাপন নেই)',restart:'আবার শুরু',reviveDone:'আবার বেঁচে উঠল! +2 জীবন',adFail:'বিজ্ঞাপন শেষ হয়নি',rotate:'অনুগ্রহ করে ফোনটি আড়াআড়ি ধরুন',title:'বীরকে ফাঁদে ফেলো'}
+ ui:{chapter:"অধ্যায় {n}",ch1:"নবিশ অন্ধকূপ",ch2:"যন্ত্রের কুঠুরি",ch3:"লাফের করিডোর",ch4:"আগুনের খাদ",ch5:"বীরদের গিল্ড",ch6:"কিংবদন্তি অন্ধকূপ",endless:"অন্তহীন মোড",endlessBest:"সেরা: ঢেউ {n}",endlessLock:"অন্তহীন মোড · খুলতে 1-5 পার করো",chLocked:"এই অধ্যায় খুলতে {id} পার করো",lvLocked:"আগে আগের লেভেল পার করো",lvTitle:"লেভেল {id} · {n} ঢেউ আটকাও",waveOf:"ঢেউ {n}/{m}",newTrapLv:"নতুন ফাঁদ: {name} · {desc}",r_cap:"সর্বোচ্চ {n}টি ফাঁদ",r_poor:"মারলে সোনা নেই · ঢেউ বোনাস বেশি",r_nodraft:"এই লেভেলে কার্ড নেই",r_lives:"মাত্র {n} জন বীর পালাতে পারবে",r_block:"ধ্বংসস্তূপ: কিছু ঘরে ফাঁদ বসবে না",r_affix:"প্রতি ঢেউ · {a}",r_rand:"প্রতি ঢেউয়ে এলোমেলো বদল",r_boss:"শেষ ঢেউ: {name} ×{n}",blockedTile:"এখানে ধ্বংসস্তূপ, বসানো যাবে না",homeConfirm:"মেনুতে যেতে আবার ট্যাপ করো",winT:"লেভেল {id} পার!",winStats:"{k} জন বীর ফাঁদে · {e} জন পালাল",star3:"★★★: একজন বীরও যেন না পালায়",lostLv:"ঢেউ {w}/{m}-এ পতন · {k} জন বীর ফাঁদে",nextLv:"পরের লেভেল",retry:"আবার চেষ্টা",menu:"মেনু",allDone:"সব 60 লেভেল পার!",unlockNew:'নতুন ফাঁদ খুলল: {name}! এখন কার্ডে আসতে পারে',gotTrap:'নতুন ফাঁদ: {name}',gotUpg:'আপগ্রেড: {name}',schoolDone:'বিল্ড সম্পূর্ণ: {name} · {bonus}',rerollNoGold:'সোনা কম। বদলাতে লাগবে {n}',newClass:'নতুন শ্রেণি: {name} · {info}',affixNow:'ঢেউয়ের প্রভাব · {a}',waveHeld:'ঢেউ {n} ঠেকানো গেল! +{g} সোনা',forgot:'অব্যবহৃত ফাঁদ সংঘ ভুলে গেছে: {list}',listSep:', ',broke:'{name} ভেঙে গেছে',bossTaunt:'এইটুকুই?',tough:'মোটা চামড়া!',ah:'আহ!',priest:'ওঠো, বীর!',escaped:'একজন বীর পালিয়েছে। পরের ঢেউয়ে অভিজ্ঞ হয়ে ফিরবে',removed:'{name} সরানো হলো, {g} সোনা ফেরত',max3:'একই ফাঁদ সর্বোচ্চ 3টি। অন্যরকম চেষ্টা করুন',maxCap:'সর্বোচ্চ {n}টি ফাঁদ। সরাতে ফাঁদে ট্যাপ করুন',noGold:'সোনা কম। {name}-এর দাম {n}',tooClose:'বীরের খুব কাছে',chainJump:'লম্বা লাফ!',bonk:'উফ, আমার মাথা!',revived:'আমি আবার বেঁচে উঠেছি!',scout:'সামনে {name}, সাবধান!',sapper:'এটা আমি নষ্ট করতে পারি।',chestMine:'গুপ্তধন! আমার!',slide:'ওরে, পিছলে যাচ্ছি—',ported:'অ্যাঁ? আমি আবার এখানে কেন?',disarmed:'স্যাপার নষ্ট করে দিয়েছে',blocked:'ঠং! আটকে দিলাম।',vets:'অভিজ্ঞ×{n}',tagNew:'নতুন ফাঁদ · {s}',cardTrapDesc:'{desc}। এখন প্রতিটি {n} সোনা।',tagUpg:'আপগ্রেড · {name}',tagItem:'জিনিস',schoolProg:'{name} {n}/3',schoolReady:' ✓',exit:'প্রস্থান',wave:'ঢেউ {n}',gold:'সোনা {n}',traps:'ফাঁদ {a}/{b}',intel:'সংঘের তথ্য',lives:'পালানোর সুযোগ',cost:'{n} সোনা',next:'পরের ঢেউ: {s}',startIn:'{n} সেকেন্ডে শুরু · এখনই শুরু করতে স্পেস',hint:'নিচ থেকে ফাঁদ বেছে মেঝেতে ট্যাপ করুন · প্রতি ঢেউয়ের পর কার্ড নিন · খোলা ফাঁদ {a}/{b}',pickCard:'ঢেউ {n} ঠেকানো গেল! একটা কার্ড নিন',reroll:'বদলান ({n} সোনা)',lost:'অন্ধকূপের পতন',lostStats:'{w} ঢেউ ঠেকানো, {k} জন বীর ফাঁদে · সেরা: {b} ঢেউ',unlockProg:'খোলা ফাঁদ {a}/{b}',allUnlocked:'সব ফাঁদ খোলা হয়েছে!',tapRestart:'আবার খেলতে ট্যাপ করুন',goalLine:'{name}: {text}',revive:'বিজ্ঞাপন দেখে আবার বাঁচুন (+2 জীবন)',reviveFree:'আবার বাঁচুন (+2 জীবন, টেস্টে বিজ্ঞাপন নেই)',restart:'আবার শুরু',reviveDone:'আবার বেঁচে উঠল! +2 জীবন',adFail:'বিজ্ঞাপন শেষ হয়নি',rotate:'অনুগ্রহ করে ফোনটি আড়াআড়ি ধরুন',title:'বীরকে ফাঁদে ফেলো'}
 },
 zh:{
  sch:{spike:[null,'尖刺',null],fall:[null,'坠落',null],mech:[null,'机关',null],heavy:[null,'重物',null]},
- ui:{unlockNew:'解锁新陷阱：{name}！之后抽卡会出现它',gotTrap:'获得新陷阱：{name}',gotUpg:'强化：{name}',schoolDone:'流派成型：{name} · {bonus}',rerollNoGold:'金币不够，换一批要 {n}',newClass:'新职业：{name} · {info}',affixNow:'本波词缀 · {a}',waveHeld:'第 {n} 波守住了  +{g} 金币',forgot:'没用上的陷阱，公会淡忘了：{list}',listSep:'、',broke:'{name}用坏了',bossTaunt:'就这点力气？',tough:'皮糙肉厚！',ah:'啊！',priest:'起来，勇者！',escaped:'有人逃走了，下一波他会作为老兵回来',removed:'拆掉了{name}，退回 {g} 金币',max3:'同一种陷阱最多放 3 个，换个花样',maxCap:'最多 {n} 个陷阱，点已有的陷阱可以拆掉',noGold:'金币不够，{name}要 {n}',tooClose:'离勇者太近了',chainJump:'连跳！',bonk:'哎哟，我的头！',revived:'我又活了！',scout:'前面有{name}，大家小心！',sapper:'这个我会拆。',chestMine:'宝箱！归我了！',slide:'哇啊，滑——',ported:'诶？我怎么回来了',disarmed:'被工兵拆掉了',blocked:'叮！挡住了。',vets:'老兵×{n}',tagNew:'新陷阱 · {s}',cardTrapDesc:'{desc}。现价 {n} 金币一个。',tagUpg:'强化 · {name}',tagItem:'道具',schoolProg:'{name} {n}/3',schoolReady:' 成型',exit:'出口',wave:'第 {n} 波',gold:'金币 {n}',traps:'陷阱 {a}/{b}',intel:'公会情报（勇者认得多少）',lives:'还能放走',cost:'{n} 金币',next:'下一波：{s}',startIn:'{n} 秒后出发 · 按空格立刻出发',hint:'选下面的陷阱，点地面放置 · 每守住一波可以抽卡 · 已解锁 {a}/{b} 种陷阱',pickCard:'守住第 {n} 波！选一张卡',reroll:'换一批（{n} 金币）',lost:'地牢失守',lostStats:'守住了 {w} 波，坑死 {k} 名勇者 · 最好成绩 {b} 波',unlockProg:'陷阱解锁进度 {a}/{b}',allUnlocked:'全部陷阱都解锁了！',tapRestart:'点击画面再来一局',goalLine:'{name}：{text}',revive:'看一段广告，复活继续（+2 条命）',reviveFree:'复活继续（+2 条命，测试版不放广告）',restart:'重新开始',reviveDone:'复活了！+2 条命',adFail:'广告没有播完，不能复活',rotate:'请把手机横过来玩',title:'坑勇者'}
+ ui:{chapter:"第 {n} 章",ch1:"新手地牢",ch2:"机关密室",ch3:"弹跳回廊",ch4:"烈焰深渊",ch5:"勇者公会",ch6:"传说地牢",endless:"无尽模式",endlessBest:"最高 {n} 波",endlessLock:"无尽模式 · 通关 1-5 解锁",chLocked:"通关 {id} 解锁本章",lvLocked:"先通关上一关",lvTitle:"第 {id} 关 · 守住 {n} 波",waveOf:"第 {n}/{m} 波",newTrapLv:"新陷阱：{name} · {desc}",r_cap:"最多只能放 {n} 个陷阱",r_poor:"击杀不给金币 · 守住一波奖励更多",r_nodraft:"本关不能抽卡",r_lives:"最多只能放走 {n} 人",r_block:"地上有碎石，部分格子不能放陷阱",r_affix:"每一波 · {a}",r_rand:"每波随机突变",r_boss:"最后一波：{name} ×{n}",blockedTile:"这里有碎石，不能放",homeConfirm:"再点一次返回菜单",winT:"第 {id} 关通关！",winStats:"坑死 {k} 人 · 放走 {e} 人",star3:"三星：一个都不放走",lostLv:"倒在第 {w}/{m} 波 · 坑死 {k} 人",nextLv:"下一关",retry:"重试",menu:"菜单",allDone:"60 关全部通关！",unlockNew:'解锁新陷阱：{name}！之后抽卡会出现它',gotTrap:'获得新陷阱：{name}',gotUpg:'强化：{name}',schoolDone:'流派成型：{name} · {bonus}',rerollNoGold:'金币不够，换一批要 {n}',newClass:'新职业：{name} · {info}',affixNow:'本波词缀 · {a}',waveHeld:'第 {n} 波守住了  +{g} 金币',forgot:'没用上的陷阱，公会淡忘了：{list}',listSep:'、',broke:'{name}用坏了',bossTaunt:'就这点力气？',tough:'皮糙肉厚！',ah:'啊！',priest:'起来，勇者！',escaped:'有人逃走了，下一波他会作为老兵回来',removed:'拆掉了{name}，退回 {g} 金币',max3:'同一种陷阱最多放 3 个，换个花样',maxCap:'最多 {n} 个陷阱，点已有的陷阱可以拆掉',noGold:'金币不够，{name}要 {n}',tooClose:'离勇者太近了',chainJump:'连跳！',bonk:'哎哟，我的头！',revived:'我又活了！',scout:'前面有{name}，大家小心！',sapper:'这个我会拆。',chestMine:'宝箱！归我了！',slide:'哇啊，滑——',ported:'诶？我怎么回来了',disarmed:'被工兵拆掉了',blocked:'叮！挡住了。',vets:'老兵×{n}',tagNew:'新陷阱 · {s}',cardTrapDesc:'{desc}。现价 {n} 金币一个。',tagUpg:'强化 · {name}',tagItem:'道具',schoolProg:'{name} {n}/3',schoolReady:' 成型',exit:'出口',wave:'第 {n} 波',gold:'金币 {n}',traps:'陷阱 {a}/{b}',intel:'公会情报（勇者认得多少）',lives:'还能放走',cost:'{n} 金币',next:'下一波：{s}',startIn:'{n} 秒后出发 · 按空格立刻出发',hint:'选下面的陷阱，点地面放置 · 每守住一波可以抽卡 · 已解锁 {a}/{b} 种陷阱',pickCard:'守住第 {n} 波！选一张卡',reroll:'换一批（{n} 金币）',lost:'地牢失守',lostStats:'守住了 {w} 波，坑死 {k} 名勇者 · 最好成绩 {b} 波',unlockProg:'陷阱解锁进度 {a}/{b}',allUnlocked:'全部陷阱都解锁了！',tapRestart:'点击画面再来一局',goalLine:'{name}：{text}',revive:'看一段广告，复活继续（+2 条命）',reviveFree:'复活继续（+2 条命，测试版不放广告）',restart:'重新开始',reviveDone:'复活了！+2 条命',adFail:'广告没有播完，不能复活',rotate:'请把手机横过来玩',title:'坑勇者'}
 }};
 const LANGS=['en','zh','pt','es','ja','hi','bn'];
 const LANG_LABEL={en:'EN',zh:'中',pt:'PT',es:'ES',ja:'日',hi:'हि',bn:'বা'};
@@ -265,9 +265,32 @@ function TrapGame(){
   function localize(){const L=I18N[LANG]||I18N.en;for(const k in TD){TD[k].name=L.td[k][0];TD[k].desc=L.td[k][1]}for(const k in UPG){UPG[k].name=L.upg[k][0];UPG[k].desc=L.upg[k][1]}for(const k in GEN){GEN[k].name=L.gen[k][0];GEN[k].desc=L.gen[k][1]}for(const k in CLS){CLS[k].name=L.cls[k][0];CLS[k].info=L.cls[k][1]}for(const k in AFX)AFX[k]=L.afx[k];for(const k in DEATH)DEATH[k]=L.death[k];DODGE.length=0;DODGE.push(...L.dodge);ESC.length=0;ESC.push(...L.esc);for(const gl of GOALS)gl.text=L.goal[gl.id];for(const k in SCH){SCH[k].name=L.sch[k][0];SCH[k].short=L.sch[k][1];SCH[k].bonus=L.sch[k][2]}}
   snapZh();localize();
   const META_KEY='kyz_meta_v1';let memMeta=null;
-  function loadMeta(){let m=null;try{m=JSON.parse(localStorage.getItem(META_KEY)||'null')}catch(e){}m=m||memMeta||{};const d={unlocked:{spike:1,pit:1,chest:1},chestKills:0,knightKills:0,vetKills:0,bonks:0,multi:0,best:0};for(const k in d)if(m[k]==null)m[k]=d[k];return m}
+  function loadMeta(){let m=null;try{m=JSON.parse(localStorage.getItem(META_KEY)||'null')}catch(e){}m=m||memMeta||{};const d={unlocked:{spike:1,pit:1,chest:1},lv:{},chestKills:0,knightKills:0,vetKills:0,bonks:0,multi:0,best:0};for(const k in d)if(m[k]==null)m[k]=d[k];return m}
   function saveMeta(){memMeta=M;try{localStorage.setItem(META_KEY,JSON.stringify(M))}catch(e){}}
   let M=loadMeta();
+  const CHD=[
+    {it:{0:['spike','pit'],2:'chest'},ic:{1:'knight',4:'thief'},ru:{5:{cap:5},6:{poor:1},7:{lives:3},8:{affix:'fast'},9:{boss:1}}},
+    {it:{0:'arrow',1:'rock',3:'boulder'},ic:{2:'brute'},ru:{4:{block:1},5:{nodraft:1},6:{affix:'armor'},7:{cap:5},8:{affix:'horde'},9:{boss:1}}},
+    {it:{0:'spring',1:'ceil',3:'ice'},ic:{2:'sapper'},ru:{4:{poor:1},5:{affix:'intel'},6:{block:1},7:{lives:3},8:{affix:'fast'},9:{boss:1}}},
+    {it:{0:'flame',2:'portal',3:'gas'},ic:{1:'priest'},ru:{4:{cap:5},5:{nodraft:1},6:{affix:'armor'},7:{affix:'horde'},8:{poor:1},9:{boss:2}}},
+    {it:{},ic:{0:'scout'},ru:{1:{affix:'rand'},2:{boss:1},3:{cap:4},4:{affix:'intel'},5:{lives:2},6:{block:1},7:{affix:'horde'},8:{affix:'rand',poor:1},9:{boss:2}}},
+    {it:{},ic:{},ru:{0:{affix:'rand'},1:{cap:5,block:1},2:{nodraft:1,affix:'armor'},3:{lives:3,affix:'fast'},4:{poor:1,affix:'intel'},5:{boss:1,affix:'rand'},6:{cap:4,affix:'horde'},7:{block:1,nodraft:1},8:{lives:2,affix:'rand'},9:{boss:3}}}
+  ];
+  const LV=[];
+  (function(){const kt=[],kc=['rookie'];
+    for(let ch=0;ch<CHD.length;ch++)for(let j=0;j<10;j++){const d=CHD[ch],i=ch*10+j,nts=[].concat(d.it[j]||[]),nt=nts[nts.length-1]||null,nc=d.ic[j]||null;
+      kt.push(...nts);if(nc)kc.push(nc);const r=Object.assign({},d.ru[j]||{});
+      const start=nts.slice();if(nt==='ceil')start.push('spring');
+      const want=Math.min((r.nodraft?4:2)+Math.floor(ch/2),kt.length);const off0=(i*7+3)%kt.length,rot=kt.slice(off0).concat(kt.slice(0,off0)).reverse();
+      for(const k of rot){if(start.length>=(ch===0?9:want))break;if(!start.includes(k)&&k!=='ceil')start.push(k)}
+      if(!start.includes('spike')&&!start.includes('pit')&&kt.includes('spike'))start.push(i%2?'pit':'spike');
+      LV.push({i,ch,j,id:(ch+1)+'-'+(j+1),waves:[3,3,4,4,5,5,5,6,6,6][j]+(ch>=2?1:0)+(ch>=4?1:0),off:ch+Math.floor(j/5),gold:50+ch*25,lives:r.lives||5,cap:r.cap||8,newT:nt,newC:nc,start,pool:kt.slice(),cls:kc.slice(),r})}})();
+  const lvOpen=i=>i===0||(M.lv[i-1]||0)>0;
+  const chOpen=k=>lvOpen(k*10);
+  const endlessOpen=()=>(M.lv[4]||0)>0||M.best>0;
+  const curCh=()=>{let k=0;for(let i=0;i<LV.length;i++)if(lvOpen(i))k=LV[i].ch;return k};
+  const E=()=>S.lv?S.wave+S.lv.off:S.wave;
+  let ran=false;
   const g={key:'trap'};let S,uid=0;
   const pop=(s,x,y,col)=>S.pops.push({s,x,y,col:col||C.fg,life:1.6});
   const flash=s=>{S.msg=s;S.msgT=1.6;SFX.play('error')};
@@ -282,7 +305,7 @@ function TrapGame(){
   const schoolN=s=>S.owned.filter(k=>TD[k].sch===s).length;
   const active=s=>schoolN(s)>=3;
   const gasHalf=()=>S.upg.gas_wide?TS*2.5:TS*1.5;
-  function lvl(h,type){let l=S.intel[type]+Math.floor((S.wave-1)/10)+(S.affix==='intel'?1:0)+(h.cls==='boss'?1:0);if(h.vet)l++;if(h.cls==='thief'&&FLOORT[type])l++;return Math.min(3,l)}
+  function lvl(h,type){let l=S.intel[type]+Math.floor((E()-1)/10)+(S.affix==='intel'?1:0)+(h.cls==='boss'?1:0);if(h.vet)l++;if(h.cls==='thief'&&FLOORT[type])l++;return Math.min(3,l)}
   function maxUses(type){let u=TD[type].uses;
     if(type==='spike'&&S.upg.spike_dur)u+=2;if(type==='pit'&&S.upg.pit_dur)u+=2;if(type==='portal'&&S.upg.portal_dur)u+=3;if(type==='ceil'&&S.upg.ceil_dur)u+=3;
     if(active('spike')&&TD[type].sch==='spike')u+=1;if(active('fall')&&(type==='ice'||type==='portal'))u+=2;return u}
@@ -294,7 +317,18 @@ function TrapGame(){
   const inR=(x,y,r)=>x>=r.x&&x<=r.x+r.w&&y>=r.y&&y<=r.y+r.h;
   const rerollCost=()=>10+5*S.rerolls;
   const costOf=k=>Math.round(TD[k].cost*(1+0.05*Math.max(0,S.wave-4)));
+  function waveCompL(n){
+    const L=S.lv,count=Math.min(12,1+Math.ceil([0.55,0.75,0.85,0.9,0.85,0.9][L.ch]*(n+Math.floor(L.off/2))))+(S.nextAffix==='horde'?3:0),list=[];
+    const ws=L.cls.map(k=>k==='rookie'?Math.max(1,4-L.ch):(k===L.newC?3:2));let sum=0;for(const w of ws)sum+=w;
+    for(let i=0;i<count;i++){let r=Math.random()*sum,k=0;for(;k<ws.length-1;k++){r-=ws[k];if(r<=0)break}list.push(L.cls[k])}
+    if(L.newC&&n<=2)list[0]=L.newC;
+    const vets=S.veterans.filter(c=>c!=='boss').splice(0).map(c=>({cls:c,vet:true}));S.veterans=[];
+    const out=vets.concat(list.map(c=>({cls:c,vet:false}))).slice(0,16);
+    if(n===L.waves&&L.r.boss)for(let b=0;b<L.r.boss;b++)out.push({cls:'boss',vet:false});
+    return out;
+  }
   function waveComp(n){
+    if(S.lv)return waveCompL(n);
     const count=Math.min(12,1+Math.ceil(n*0.9))+(S.nextAffix==='horde'?3:0),list=[];
     for(let i=0;i<count;i++){let cls='rookie';const r=Math.random();
       if(n>=8&&r<0.1)cls='scout';else if(n>=7&&r<0.2)cls='priest';else if(n>=6&&r<0.32)cls='sapper';
@@ -305,19 +339,28 @@ function TrapGame(){
     if(n%5===0)out.push({cls:'boss',vet:false});
     return out;
   }
-  g.reset=function(){
+  g.reset=function(ch){
     M=loadMeta();
-    const others=ALL.filter(k=>M.unlocked[k]&&k!=='spike'&&k!=='ceil');
-    S={wave:0,lives:5,gold:50,cap:8,traps:[],arrows:[],balls:[],heroes:[],queue:[],spawnT:0,intel:{},glow:{},waveKills:{},veterans:[],owned:['spike',choice(others)],upg:{},sel:'spike',over:false,t:0,fx:makeFX(),pops:[],msg:'',msgT:0,hover:null,phase:'break',breakT:10,preview:[],seen:{},talk:null,kills:0,announce:null,unlock:null,draft:null,rerolls:0,escThisWave:0,affix:null,nextAffix:null,run:{spikeKills:0,streak:0}};
-    for(const k of ALL){S.intel[k]=0;S.glow[k]=0}
-    S.preview=waveComp(1);
+    S={screen:'menu',ch:ch==null?curCh():ch,fx:makeFX(),pops:[],msg:'',msgT:0,t:0,hover:null,traps:[],heroes:[],owned:[],wave:0,over:false,win:null};
   };
+  function startRun(mode,i){const go=()=>{begin(mode,i);ran=true};if(ran&&HOOK.ad)HOOK.ad(go);else go()}
+  function toMenu(){const ch=S.lv?S.lv.ch:null;if(g.inPlay()&&HOOK.stop)HOOK.stop();g.reset(ch)}
+  function begin(mode,li){
+    M=loadMeta();
+    const Lv=mode==='level'?LV[li]:null;
+    const others=ALL.filter(k=>M.unlocked[k]&&k!=='spike'&&k!=='ceil');
+    S={screen:'play',mode,lv:Lv,lost:0,home:0,blocked:new Set(),btns:[],win:null,wave:0,lives:Lv?Lv.lives:5,gold:Lv?Lv.gold:50,cap:Lv?Lv.cap:8,traps:[],arrows:[],balls:[],heroes:[],queue:[],spawnT:0,intel:{},glow:{},waveKills:{},veterans:[],owned:['spike',choice(others)],upg:{},sel:'spike',over:false,t:0,fx:makeFX(),pops:[],msg:'',msgT:0,hover:null,phase:'break',breakT:10,preview:[],seen:{},talk:null,kills:0,announce:null,unlock:null,draft:null,rerolls:0,escThisWave:0,affix:null,nextAffix:null,run:{spikeKills:0,streak:0}};
+    for(const k of ALL){S.intel[k]=0;S.glow[k]=0}
+    if(Lv){S.owned=Lv.start.slice();S.sel=S.owned[0];S.nextAffix=Lv.r.affix&&Lv.r.affix!=='rand'?Lv.r.affix:null;
+      if(Lv.r.block)for(let t=1;t<NT-1;t++)if((t+Lv.i)%4===0)S.blocked.add(t)}
+    S.preview=waveComp(1);
+  }
   function checkUnlocks(){for(const gl of GOALS){if(M.unlocked[gl.id])continue;const[a,b]=gl.p();if(a>=b){M.unlocked[gl.id]=1;saveMeta();SFX.play('unlock');S.unlock={text:T('unlockNew',{name:TD[gl.id].name}),t:4.5};S.fx.shake=Math.max(S.fx.shake,6)}}}
   function makeDraft(){
     const pool=[];
-    if(S.owned.length<8)ALL.filter(k=>M.unlocked[k]&&!S.owned.includes(k)).forEach(k=>pool.push({kind:'trap',id:k,w:3}));
+    if(S.owned.length<8)ALL.filter(k=>(S.lv?S.lv.pool.includes(k):M.unlocked[k])&&!S.owned.includes(k)).forEach(k=>pool.push({kind:'trap',id:k,w:3}));
     Object.keys(UPG).filter(u=>S.owned.includes(UPG[u].trap)&&!S.upg[u]).forEach(u=>pool.push({kind:'upg',id:u,w:2}));
-    pool.push({kind:'gen',id:'gold',w:1});if(S.lives<7)pool.push({kind:'gen',id:'life',w:1});if(S.cap<14)pool.push({kind:'gen',id:'cap',w:1});
+    pool.push({kind:'gen',id:'gold',w:1});if(S.lives<7&&!(S.lv&&S.lv.r.lives))pool.push({kind:'gen',id:'life',w:1});if(S.cap<14&&!(S.lv&&S.lv.r.cap))pool.push({kind:'gen',id:'cap',w:1});
     const out=[];
     while(out.length<3&&pool.length){let sum=0;for(const p of pool)sum+=p.w;let r=Math.random()*sum,i=0;for(;i<pool.length-1;i++){r-=pool[i].w;if(r<=0)break}out.push(pool.splice(i,1)[0])}
     return out;
@@ -346,19 +389,29 @@ function TrapGame(){
     else if(S.affix)S.announce={text:T('affixNow',{a:AFX[S.affix]}),t:3.5,col:C.coral}
   }
   function endWave(){
-    SFX.play('clear');const bonus=10+S.wave;S.gold+=bonus;pop(T('waveHeld',{n:S.wave,g:bonus}),W/2,CEIL+96,C.mint);
+    SFX.play('clear');const bonus=(S.lv&&S.lv.r.poor)?20+4*S.wave:10+S.wave;S.gold+=bonus;pop(T('waveHeld',{n:S.wave,g:bonus}),W/2,CEIL+96,C.mint);
     const forgot=[];for(const k of ALL)if(S.intel[k]>0&&!S.waveKills[k]){S.intel[k]--;forgot.push(TD[k].name)}
     if(forgot.length)pop(T('forgot',{list:forgot.join(T('listSep'))}),W/2,CEIL+126,C.muted);
     if(S.escThisWave===0)S.run.streak++;else S.run.streak=0;
-    M.best=Math.max(M.best,S.wave);saveMeta();checkUnlocks();
+    if(!S.lv)M.best=Math.max(M.best,S.wave);saveMeta();checkUnlocks();
     S.arrows=[];S.balls=[];for(const t of S.traps)if(t.type==='pit'){t.open=false;t.openT=0}
-    S.nextAffix=(S.wave+1>=6&&Math.random()<0.5)?choice(Object.keys(AFX)):null;
+    if(S.lv&&S.wave>=S.lv.waves){winLevel();return}
+    if(S.lv)S.nextAffix=S.lv.r.affix==='rand'?(Math.random()<0.65?choice(Object.keys(AFX)):null):(S.lv.r.affix||null);
+    else S.nextAffix=(S.wave+1>=6&&Math.random()<0.5)?choice(Object.keys(AFX)):null;
     S.preview=waveComp(S.wave+1);S.breakT=7;
-    S.draft=makeDraft();S.phase=S.draft.length?'draft':'break';
+    if(S.lv&&S.lv.r.nodraft){S.draft=null;S.phase='break'}
+    else{S.draft=makeDraft();S.phase=S.draft.length?'draft':'break'}
+  }
+  function winLevel(){
+    const L=S.lv,st=S.revived?1:S.lost===0?3:S.lost<=Math.floor(L.lives/2)?2:1;
+    S.win={stars:st,t:0,best:Math.max(st,M.lv[L.i]||0)};
+    M.lv[L.i]=S.win.best;for(const k of [].concat(CHD[L.ch].it[L.j]||[]))M.unlocked[k]=1;saveMeta();
+    SFX.play('unlock');S.phase='break';S.heroes=[];S.queue=[];
+    if(HOOK.stop)HOOK.stop();
   }
   function spawnHero(spec){
-    const c=CLS[spec.cls],mul=(1+0.03*(S.wave-1))*(spec.vet?1.15:1)*(S.affix==='fast'?1.25:1);
-    const hp=(spec.cls==='boss'?3+Math.floor(S.wave/10):c.hp)+(S.affix==='armor'?1:0);
+    const c=CLS[spec.cls],mul=(1+0.03*(E()-1))*(spec.vet?1.15:1)*(S.affix==='fast'?1.25:1);
+    const hp=(spec.cls==='boss'?3+Math.floor(E()/10):c.hp)+(S.affix==='armor'?1:0);
     S.heroes.push({id:++uid,cls:spec.cls,vet:spec.vet,x:10,y:FLOOR,vy:0,air:false,base:c.spd*mul*SPD,hp,maxhp:hp,inv:0,revives:spec.cls==='priest'?1:0,disarms:spec.cls==='sapper'?2:0,revived:false,reviveT:0,dash:0,duck:false,wait:0,stun:0,slideT:0,poison:0,dead:false,escaped:false,gone:false,deadT:0,fall:false,lastChest:-9,iceT:-9,lastIce:null,ported:false,jvx:0,vx:0,bonked:false,run:0,eval:new Set(),spot:new Set(),spikeHit:new Set(),hurt:0});
   }
   function breakTrap(t){t.done=true;t.doneT=0;t.broke=true;S.fx.burst(t.x,TD[t.type].up?FLOOR-60:FLOOR-6,C.muted,10,150);wpop(T('broke',{name:TD[t.type].name}),t.x,FLOOR-96,C.muted)}
@@ -376,7 +429,7 @@ function TrapGame(){
         return}
     }
     h.dead=true;h.deadT=0;h.fall=!!fall;SFX.play('kill');h.vy=fall?-60:0;
-    S.kills++;const rw=h.revived?0:CLS[h.cls].gold+(h.vet?5:0);S.gold+=rw;if(rw)wpop(`+${rw}`,h.x,h.y-62,C.sun);
+    S.kills++;const rw=(h.revived||(S.lv&&S.lv.r.poor))?0:CLS[h.cls].gold+(h.vet?5:0);S.gold+=rw;if(rw)wpop(`+${rw}`,h.x,h.y-62,C.sun);
     S.fx.burst(h.x,h.y-17,CLS[h.cls].body,18,240);S.fx.shake=Math.max(S.fx.shake,8);
     S.killBy=S.killBy||{};S.killBy[type]=(S.killBy[type]||0)+1;
     const learned=[type];
@@ -395,28 +448,23 @@ function TrapGame(){
     checkUnlocks();
   }
   function escape(h){
-    h.escaped=true;h.deadT=0;S.lives-=h.cls==='boss'?(S.wave<=5?2:3):1;S.escThisWave++;S.veterans.push(h.cls);
+    h.escaped=true;h.deadT=0;const cost=h.cls==='boss'?(E()<=5?2:3):1;S.lives-=cost;S.lost+=cost;S.escThisWave++;S.veterans.push(h.cls);
     SFX.play('escape');say(h,choice(ESC),true);pop(T('escaped'),W/2,CEIL+96,C.coral);S.fx.shake=6;
-    if(S.lives<=0){SFX.play('over');S.over=true;M.best=Math.max(M.best,S.wave-1);saveMeta();saveBest('trap3',Math.max(0,S.wave-1));if(HOOK.over)HOOK.over()}
+    if(S.lives<=0){SFX.play('over');S.over=true;if(!S.lv){M.best=Math.max(M.best,S.wave-1);saveMeta();saveBest('trap3',Math.max(0,S.wave-1))}if(HOOK.stop)HOOK.stop()}
   }
   function spawnBall(x,big,src,type){S.balls.push({x,big,src,type,r:big?24:14,vx:-280,rot:0})}
-  const BTN_REV={x:W/2-270,y:H-76,w:320,h:52},BTN_RE={x:W/2+70,y:H-76,w:200,h:52};
-  function overClick(x,y){
-    if(!S.revived&&inR(x,y,BTN_REV)){if(HOOK.revive)HOOK.revive();return}
-    if(inR(x,y,BTN_RE)||S.revived){if(HOOK.restart)HOOK.restart();else g.reset()}
-  }
-  g.revive=function(){S.revived=true;S.over=false;S.lives=2;for(const h of S.heroes)h.gone=true;S.heroes=[];S.queue=[];S.arrows=[];S.balls=[];pop(T('reviveDone'),W/2,CEIL+96,C.mint)};
-  g.flash=s=>flash(s);
-  g.isOver=()=>S.over;
   g.down=function(x,y){
     SFX.unlock();
     {const m=MUTE();if(Math.abs(x-m.x)<20&&Math.abs(y-m.y)<20){SFX.toggle();return}}
     {const m=LBTN();if(Math.abs(x-m.x)<22&&Math.abs(y-m.y)<20){cycleLang();localize();SFX.play('card');return}}
-    if(S.over){overClick(x,y);return}
+    if(S.screen==='menu'){menuClick(x,y);return}
+    {const m=HOME();if(Math.abs(x-m.x)<22&&Math.abs(y-m.y)<22){if(S.home>0)toMenu();else{S.home=2;S.msg=T('homeConfirm');S.msgT=2}return}}
+    if(S.over||S.win){for(const b of S.btns||[])if(inR(x,y,b)){btnAct(b.id);return}return}
     if(S.phase==='draft'){draftClick(x,y);return}
     if(y>=BAR){for(const r of slotRects())if(inR(x,y,r)){S.sel=r.k;return}return}
     if(y<CEIL)return;
     const ti=tileAt(x/K);if(ti<0)return;
+    if(S.blocked&&S.blocked.has(ti)){flash(T('blockedTile'));return}
     const tx=tileX(ti),type=S.sel,up=!!TD[type].up;
     const same=S.traps.find(t=>t.tile===ti&&!t.done&&!!TD[t.type].up===up);
     if(same){const back=Math.floor((same.paid||TD[same.type].cost)/2);S.gold+=back;S.traps.splice(S.traps.indexOf(same),1);S.msg=T('removed',{name:TD[same.type].name,g:back});S.msgT=1.6;SFX.play('remove');S.fx.burst(tx,up?FLOOR-60:FLOOR-6,C.muted,8,120);return}
@@ -429,7 +477,68 @@ function TrapGame(){
     S.fx.burst(tx,up?FLOOR-60:FLOOR-6,C.muted,6,90);SFX.play('place');
   };
   g.move=function(x,y){S.hover={x,y}};
-  g.fresh=()=>(S.wave===0&&!S.traps.length)||S.over;
+  g.fresh=()=>S.screen==='menu';
+  g.inPlay=()=>S.screen==='play'&&!S.over&&!S.win;
+  g.isOver=()=>S.screen!=='play'||!!(S.over||S.win);
+  function doRevive(){S.revived=true;S.over=false;S.lives=2;for(const h of S.heroes)h.gone=true;S.heroes=[];S.queue=[];S.arrows=[];S.balls=[];pop(T('reviveDone'),W/2,CEIL+96,C.mint)}
+  g.revive=doRevive;g.flash=s=>flash(s);
+  function btnAct(id){
+    if(id==='revive'){if(HOOK.revive)HOOK.revive(ok=>{if(ok)doRevive();else flash(T('adFail'))});return}
+    if(id==='retry'){startRun(S.mode,S.lv?S.lv.i:0);return}
+    if(id==='next'){startRun('level',S.lv.i+1);return}
+    if(id==='menu'){toMenu();return}
+  }
+  function btnRow(defs,y){const gap=14;let tot=gap*(defs.length-1);for(const d of defs)tot+=d.w;const sc=Math.min(1,(W-60)/tot);let x=(W-tot*sc)/2;return defs.map(d=>{const r=Object.assign({},d,{x,y,w:d.w*sc,h:50});x+=r.w+gap*sc;return r})}
+  function drawBtns(c,list){for(const b of list){rr(c,b.x,b.y,b.w,b.h,12);c.fillStyle=b.col||C.surface2;c.fill();fitTxt(c,b.label,b.x+b.w/2,b.y+b.h/2,16,b.w-20,b.fg||C.fg,'center',800)}}
+  const HOME=()=>CMP?{x:22,y:23}:{x:734,y:96};
+  function drawHome(c){const m=HOME();c.save();c.translate(m.x,m.y);c.fillStyle=S.home>0?C.coral:C.muted;c.beginPath();c.moveTo(-10,-1);c.lineTo(0,-10);c.lineTo(10,-1);c.closePath();c.fill();c.fillRect(-7,-1,14,10);c.fillStyle=C.deep;c.fillRect(-2,3,4,6);c.restore()}
+  const MT=CMP?46:112;
+  function menuGeo(){
+    const tabY=MT+10,tabH=38,tabW=(W-40-5*8)/6,tabs=CHD.map((_,k)=>({k,x:20+k*(tabW+8),y:tabY,w:tabW,h:tabH}));
+    const headY=tabY+tabH+22,gridY=headY+20,endH=46,endY=H-endH-12,bw=(W-40-4*14)/5,bh=Math.min(112,(endY-14-gridY-12)/2);
+    const lv=[];for(let j=0;j<10;j++)lv.push({i:S.ch*10+j,x:20+(j%5)*(bw+14),y:gridY+Math.floor(j/5)*(bh+12),w:bw,h:bh});
+    return{tabs,headY,lv,end:{x:W/2-210,y:endY,w:420,h:endH}};
+  }
+  function menuClick(x,y){
+    const G=menuGeo();
+    for(const t of G.tabs)if(inR(x,y,t)){if(chOpen(t.k)){S.ch=t.k;SFX.play('card')}else flash(T('chLocked',{id:LV[t.k*10-1].id}));return}
+    for(const b of G.lv)if(inR(x,y,b)){if(lvOpen(b.i)){SFX.play('wave');startRun('level',b.i)}else flash(T('lvLocked'));return}
+    if(inR(x,y,G.end)){if(endlessOpen()){SFX.play('wave');startRun('endless')}else flash(T('endlessLock'));return}
+  }
+  function starStr(n){return '★'.repeat(n)+'☆'.repeat(3-n)}
+  function drawStars(c,n,x,y,size,gap){for(let k=0;k<3;k++)txt(c,'★',x+(k-1)*gap,y,size,k<n?C.sun:C.deep,'center',800)}
+  function drawMenu(c){
+    c.fillStyle=C.deep;c.fillRect(-20,-20,W+40,H+40);
+    let tot=0;for(const k in M.lv)tot+=M.lv[k];
+    txt(c,T('title'),20,MT/2,22,C.fg,'left',800);c.font=`800 22px ${FONT}`;const tw=c.measureText(T('title')).width;
+    txt(c,`★ ${tot}/${LV.length*3}`,20+tw+18,MT/2+1,16,C.sun,'left',800);
+    const G=menuGeo();
+    for(const t of G.tabs){const open=chOpen(t.k),sel=t.k===S.ch;rr(c,t.x,t.y,t.w,t.h,10);c.fillStyle=sel?C.surface2:C.surface;c.fill();if(sel){c.strokeStyle=C.sun;c.lineWidth=2;c.stroke()}
+      c.globalAlpha=open?1:0.4;fitTxt(c,T('chapter',{n:t.k+1}),t.x+t.w/2,t.y+t.h/2,15,t.w-14,sel?C.sun:C.fg,'center',800);c.globalAlpha=1}
+    let cs=0;for(let j=0;j<10;j++)cs+=M.lv[S.ch*10+j]||0;
+    fitTxt(c,T('chapter',{n:S.ch+1})+' · '+T('ch'+(S.ch+1)),20,G.headY,18,W-200,C.fg,'left',800);
+    txt(c,`★ ${cs}/30`,W-20,G.headY,15,C.sun,'right',800);
+    let nextI=-1;for(let i=0;i<LV.length;i++)if(lvOpen(i)&&!(M.lv[i]>0)){nextI=i;break}
+    for(const b of G.lv){const Lv=LV[b.i],open=lvOpen(b.i),st=M.lv[b.i]||0;
+      rr(c,b.x,b.y,b.w,b.h,14);c.fillStyle=st?C.surface2:C.surface;c.fill();
+      if(b.i===nextI){c.strokeStyle=C.sun;c.lineWidth=3;c.stroke()}
+      c.globalAlpha=open?1:0.35;
+      txt(c,Lv.id,b.x+b.w/2,b.y+b.h*0.4,26,C.fg,'center',800);
+      if(open)drawStars(c,st,b.x+b.w/2,b.y+b.h*0.74,20,24);
+      else{c.fillStyle=C.muted;rr(c,b.x+b.w/2-9,b.y+b.h*0.72,18,14,3);c.fill();c.strokeStyle=C.muted;c.lineWidth=3;c.beginPath();c.arc(b.x+b.w/2,b.y+b.h*0.72,6,Math.PI,0);c.stroke()}
+      if(Lv.newT)icon(c,Lv.newT,b.x+b.w-20,b.y+18,0.55);
+      else if(Lv.newC){c.fillStyle=CLS[Lv.newC].body;rr(c,b.x+b.w-26,b.y+8,12,18,4);c.fill()}
+      if(Lv.r.boss)txt(c,'♛',b.x+16,b.y+18,16,C.sun,'center',800);
+      else if(Object.keys(Lv.r).length)txt(c,'!',b.x+16,b.y+18,16,C.coral,'center',800);
+      c.globalAlpha=1}
+    const e=G.end,eo=endlessOpen();rr(c,e.x,e.y,e.w,e.h,12);c.fillStyle=eo?C.mint:C.surface;c.fill();
+    fitTxt(c,eo?T('endless')+' · '+T('endlessBest',{n:getBest('trap3')}):T('endlessLock'),e.x+e.w/2,e.y+e.h/2,16,e.w-24,eo?C.deep:C.muted,'center',800);
+    drawMute(c);drawLang(c);
+    if(S.msgT>0)pill(c,S.msg,W/2,G.headY+80,15,C.coral,C.fg);
+  }
+  function ruleTexts(Lv){const r=Lv.r,o=[];
+    if(r.cap)o.push(T('r_cap',{n:r.cap}));if(r.lives)o.push(T('r_lives',{n:r.lives}));if(r.poor)o.push(T('r_poor'));if(r.nodraft)o.push(T('r_nodraft'));if(r.block)o.push(T('r_block'));
+    if(r.affix)o.push(r.affix==='rand'?T('r_rand'):T('r_affix',{a:AFX[r.affix]}));if(r.boss)o.push(T('r_boss',{name:CLS.boss.name,n:r.boss}));return o}
   function jumpOver(h,t){
     let end=t.x;
     const fl=S.traps.filter(q=>!q.done&&FLOORT[q.type]&&q.x>t.x&&h.spot.has(q.id)).sort((a,b)=>a.x-b.x);
@@ -542,13 +651,15 @@ function TrapGame(){
   }
   g.update=function(dt){
     S.t+=dt;S.fx.update(dt);stepPops(S,dt);
+    if(S.screen==='menu')return;
+    if(S.home>0)S.home-=dt;if(S.win)S.win.t+=dt;
     if(S.talk){S.talk.t-=dt;if(S.talk.t<=0)S.talk=null}
     if(S.announce){S.announce.t-=dt;if(S.announce.t<=0)S.announce=null}
     if(S.unlock){S.unlock.t-=dt;if(S.unlock.t<=0)S.unlock=null}
     for(const k of ALL)if(S.glow[k]>0)S.glow[k]-=dt;
     for(const t of S.traps){if(t.arm>0)t.arm-=dt;if(t.done)t.doneT+=dt}
     S.traps=S.traps.filter(t=>!(t.done&&t.doneT>1.2));
-    if(S.over||S.phase==='draft')return;
+    if(S.over||S.win||S.phase==='draft')return;
     hazards(dt);
     if(S.phase==='break'){S.breakT-=dt;if(S.breakT<=0)startWave();return}
     S.spawnT-=dt;if(S.queue.length&&S.spawnT<=0){spawnHero(S.queue.shift());S.spawnT=1.3}
@@ -556,7 +667,7 @@ function TrapGame(){
     S.heroes=S.heroes.filter(h=>!h.gone);
     if(!S.queue.length&&!S.heroes.length&&!S.balls.length)endWave();
   };
-  g.skip=function(){if(S.phase==='break'&&!S.over)S.breakT=0};
+  g.skip=function(){if(S.screen==='play'&&S.phase==='break'&&!S.over&&!S.win)S.breakT=0};
   function icon(c,type,x,y,s){
     c.save();c.translate(x,y);c.scale(s,s);
     if(type==='spike'){c.fillStyle=C.coral;for(let i=-1;i<=1;i++){c.beginPath();c.moveTo(i*12-6,8);c.lineTo(i*12,-8);c.lineTo(i*12+6,8);c.fill()}}
@@ -642,6 +753,7 @@ function TrapGame(){
     if(cd.kind==='trap'||cd.kind==='upg'){const s=TD[cd.kind==='trap'?cd.id:UPG[cd.id].trap].sch;const n=schoolN(s)+(cd.kind==='trap'?1:0);txt(c,T('schoolProg',{name:SCH[s].name,n:Math.min(n,3)})+(n>=3?T('schoolReady'):''),r.x+r.w/2,r.y+r.h-14,13,SCH[s].col,'center',700)}
   }
   g.draw=function(c){
+    if(S.screen==='menu'){c.save();drawMenu(c);c.restore();return}
     c.save();S.fx.apply(c);
     c.fillStyle=C.deep;c.fillRect(-20,-20,W+40,H+40);
     c.save();c.translate(0,FLOOR*(1-K));c.scale(K,K);
@@ -651,6 +763,7 @@ function TrapGame(){
     c.fillStyle=C.surface2;c.fillRect(0,FLOOR,WW,WBAR-FLOOR);
     c.strokeStyle=C.line;c.lineWidth=2;line(c,0,FLOOR,WW,FLOOR);
     for(let i=0;i<=NT;i++){const x=T0+i*TS;line(c,x,FLOOR,x,FLOOR+6)}
+    for(const bt of S.blocked||[]){const bx=tileX(bt);c.fillStyle='rgba(168,153,138,0.12)';c.fillRect(bx-TS/2+2,WCEIL,TS-4,FLOOR-WCEIL);c.fillStyle=C.stone;c.beginPath();c.moveTo(bx-20,FLOOR);c.lineTo(bx-14,FLOOR-12);c.lineTo(bx-4,FLOOR-16);c.lineTo(bx+2,FLOOR-8);c.lineTo(bx+10,FLOOR-14);c.lineTo(bx+20,FLOOR);c.closePath();c.fill();c.fillStyle=C.muted;c.fillRect(bx-6,FLOOR-6,8,6)}
     c.fillStyle='#0b1019';rr(c,0,FLOOR-74,40,74,[18,18,0,0]);c.fill();
     c.fillStyle='rgba(255,201,74,0.18)';rr(c,WW-42,FLOOR-78,42,78,[20,20,0,0]);c.fill();c.strokeStyle=C.sun;c.lineWidth=2;c.stroke();
     txt(c,T('exit'),WW-21,FLOOR-94,13,C.sun,'center',700);
@@ -666,12 +779,14 @@ function TrapGame(){
     // top HUD
     if(CMP){
       c.fillStyle=C.deep;c.fillRect(0,0,W,CEIL);
-      S.owned.forEach((k,i)=>{const x=24+i*44;
+      const st=S.owned.length>6?40:44;
+      S.owned.forEach((k,i)=>{const x=60+i*st;
         if(S.glow[k]>0){c.fillStyle=`rgba(255,107,87,${clamp(S.glow[k],0,1)*0.4})`;rr(c,x-20,2,40,CEIL-4,6);c.fill()}
         icon(c,k,x,17,0.62);for(let j=0;j<3;j++){c.fillStyle=S.intel[k]>j?C.coral:C.surface2;c.fillRect(x-13+j*9,33,7,5)}});
-      let tx=Math.max(24+S.owned.length*44+10,380);const ty=CEIL/2;
+      let tx=Math.max(60+S.owned.length*st,380);const ty=CEIL/2;
       const seg=(t,size,col,gap)=>{c.font=`800 ${size}px ${FONT}`;txt(c,t,tx,ty,size,col,'left',800);tx+=c.measureText(t).width+gap};
-      seg(S.phase==='fight'?T('wave',{n:S.wave}):T('wave',{n:S.wave+1}),20,C.fg,22);seg(T('gold',{n:S.gold}),20,C.sun,22);seg(T('traps',{a:S.traps.filter(t=>!t.done).length,b:S.cap}),15,C.muted,0);
+      const wv=S.phase==='fight'?S.wave:Math.min(S.wave+1,S.lv?S.lv.waves:999);if(S.lv)seg(S.lv.id,15,C.muted,10);
+      seg(S.lv?T('waveOf',{n:wv,m:S.lv.waves}):T('wave',{n:wv}),20,C.fg,22);seg(T('gold',{n:S.gold}),20,C.sun,22);seg(T('traps',{a:S.traps.filter(t=>!t.done).length,b:S.cap}),15,C.muted,0);
       for(let i=0;i<Math.max(5,S.lives);i++){const x=W-18-i*20,y=13;c.fillStyle=i<S.lives?C.coral:C.surface2;c.beginPath();c.moveTo(x,y+7);c.bezierCurveTo(x-11,y-2,x-5,y-9,x,y-3);c.bezierCurveTo(x+5,y-9,x+11,y-2,x,y+7);c.fill()}
       const sch=Object.keys(SCH).filter(s=>schoolN(s)>0);let sx=W-10;
       for(const s2 of [...sch].reverse()){const n=schoolN(s2),t=`${SCH[s2].short} ${Math.min(n,3)}/3`;c.font=`700 12px ${FONT}`;txt(c,t,sx,35,12,n>=3?SCH[s2].col:C.muted,'right',700);sx-=c.measureText(t).width+10}
@@ -683,7 +798,7 @@ function TrapGame(){
       if(S.glow[k]>0){c.fillStyle=`rgba(255,107,87,${clamp(S.glow[k],0,1)*0.35})`;rr(c,x-26,iy-22,52,CMP?76:68,8);c.fill()}
       icon(c,k,x,iy,isc);for(let j=0;j<3;j++){c.fillStyle=S.intel[k]>j?C.coral:C.surface2;c.fillRect(x-15+j*11,iy+(CMP?18:22),9,6)}txt(c,TD[k].name,x,iy+(CMP?38:40),CMP?14:13,C.muted,'center',600)});
     const cx=CMP?560:W-270;
-    txt(c,S.phase==='fight'?T('wave',{n:S.wave}):T('wave',{n:S.wave+1}),cx,CMP?22:34,CMP?24:26,C.fg,'center',800);
+    txt(c,S.lv?T('waveOf',{n:S.phase==='fight'?S.wave:Math.min(S.wave+1,S.lv.waves),m:S.lv.waves}):S.phase==='fight'?T('wave',{n:S.wave}):T('wave',{n:S.wave+1}),cx,CMP?22:34,CMP?24:26,C.fg,'center',800);
     txt(c,T('gold',{n:S.gold}),cx,CMP?50:68,CMP?21:19,C.sun,'center',800);
     txt(c,T('traps',{a:S.traps.filter(t=>!t.done).length,b:S.cap}),cx,CMP?75:96,14,C.muted,'center',600);
     if(!CMP)txt(c,T('lives'),W-16,20,13,C.muted,'right',600);
@@ -691,7 +806,7 @@ function TrapGame(){
     const sch=Object.keys(SCH).filter(s=>schoolN(s)>0);
     sch.slice(0,CMP?3:4).forEach((s,i)=>{const n=schoolN(s);txt(c,`${SCH[s].name} ${Math.min(n,3)}/3${n>=3?' ✓':''}`,CMP?W-192:W-16,(CMP?46:74)+i*15,CMP?13:12,n>=3?SCH[s].col:C.muted,'right',700)});
     }
-    drawMute(c);drawLang(c);
+    drawMute(c);drawLang(c);drawHome(c);
     // bottom bar
     c.fillStyle=C.deep;c.fillRect(0,BAR,W,H-BAR);
     for(const r of slotRects()){
@@ -703,16 +818,21 @@ function TrapGame(){
       c.globalAlpha=1;
     }
     // messages
-    if(S.phase==='break'&&!S.over){
+    if(S.phase==='break'&&!S.over&&!S.win&&S.wave===0&&S.lv){
+      const Lv=S.lv;pill(c,T('lvTitle',{id:Lv.id,n:Lv.waves}),W/2,CEIL+110,16,C.sun,C.deep);let yy=CEIL+146;
+      if(Lv.newT&&Lv.i>0){pill(c,T('newTrapLv',{name:TD[Lv.newT].name,desc:TD[Lv.newT].desc}),W/2,yy,14,C.sky,C.deep);yy+=34}
+      for(const rt of ruleTexts(Lv).slice(0,3)){pill(c,rt,W/2,yy,14,'rgba(20,28,43,0.92)',C.coral);yy+=34}
+    }
+    if(S.phase==='break'&&!S.over&&!S.win){
       pill(c,T('next',{s:summary(S.preview)}),W/2,CEIL+30,15,'rgba(20,28,43,0.9)',C.fg);
       pill(c,T('startIn',{n:Math.ceil(S.breakT)}),W/2,CEIL+66,13,'rgba(20,28,43,0.9)',C.muted);
-      if(S.wave===0)pill(c,T('hint',{a:ALL.filter(k=>M.unlocked[k]).length,b:ALL.length}),W/2,CEIL+230,14,'rgba(20,28,43,0.9)',C.fg);
+      if(S.wave===0&&(!S.lv||S.lv.i===0))pill(c,T('hint',{a:ALL.filter(k=>M.unlocked[k]).length,b:ALL.length}),W/2,CEIL+230,14,'rgba(20,28,43,0.9)',C.fg);
     }
     if(S.announce)pill(c,S.announce.text,W/2,CEIL+30,15,S.announce.col||C.sky,C.deep);
     if(S.unlock)pill(c,S.unlock.text,W/2,CEIL+160,17,C.sun,C.deep);
     if(S.msgT>0)pill(c,S.msg,W/2,CEIL+196,15,C.coral,C.fg);
     if(S.phase!=='draft')drawPops(c,S);
-    if(S.phase==='draft'&&!S.over&&S.draft){
+    if(S.phase==='draft'&&!S.over&&!S.win&&S.draft){
       c.fillStyle='rgba(12,17,28,0.88)';c.fillRect(0,CEIL,W,BAR-CEIL);
       txt(c,T('pickCard',{n:S.wave}),W/2,CEIL+20,18,C.fg,'center',800);
       S.draft.forEach((cd,i)=>drawCard(c,cd,CARD(i)));
@@ -720,7 +840,27 @@ function TrapGame(){
       txt(c,T('reroll',{n:rerollCost()}),W/2,RER.y+RER.h/2,15,can?C.fg:C.muted,'center',700);
       if(S.unlock)pill(c,S.unlock.text,W/2,CEIL+160,17,C.sun,C.deep);
     }
-    if(S.over){
+    const BY=H-(CMP?70:76);
+    if(S.win){
+      c.fillStyle='rgba(12,17,28,0.9)';c.fillRect(0,0,W,H);const y0=CMP?60:100,Lv=S.lv;
+      txt(c,T('winT',{id:Lv.id}),W/2,y0,CMP?34:42,C.sun,'center',800);
+      for(let k=0;k<3;k++){const a=clamp((S.win.t-0.3-k*0.35)*4,0,1),on=k<S.win.stars&&a>0;const sz=56*(on?(1+0.4*(1-a)):1);txt(c,'★',W/2+(k-1)*76,y0+80,sz,on?C.sun:C.surface2,'center',800)}
+      txt(c,T('winStats',{k:S.kills,e:S.lost}),W/2,y0+140,17,C.fg,'center',700);
+      if(S.win.stars<3)txt(c,T('star3'),W/2,y0+172,15,C.muted,'center',600);
+      else if(Lv.i===LV.length-1)txt(c,T('allDone'),W/2,y0+172,17,C.mint,'center',800);
+      const d=[];if(LV[Lv.i+1])d.push({id:'next',label:T('nextLv'),w:240,col:C.sun,fg:C.deep});d.push({id:'retry',label:T('retry'),w:170},{id:'menu',label:T('menu'),w:150});
+      S.btns=btnRow(d,BY);drawBtns(c,S.btns);
+    }
+    if(S.over&&S.lv){
+      c.fillStyle='rgba(12,17,28,0.9)';c.fillRect(0,0,W,H);const y0=CMP?70:110;
+      txt(c,T('lost'),W/2,y0,CMP?34:42,C.fg,'center',800);
+      txt(c,T('lostLv',{w:S.wave,m:S.lv.waves,k:S.kills}),W/2,y0+46,17,C.muted,'center',600);
+      txt(c,T('lvTitle',{id:S.lv.id,n:S.lv.waves}),W/2,y0+90,16,C.sun,'center',700);
+      ruleTexts(S.lv).slice(0,3).forEach((rt,k)=>txt(c,rt,W/2,y0+122+k*26,14,C.coral,'center',600));
+      const d=[];if(HOOK.revive&&!S.revived)d.push({id:'revive',label:T(HOOK.reviveKey||'revive'),w:330,col:C.mint,fg:C.deep});d.push({id:'retry',label:T('retry'),w:170},{id:'menu',label:T('menu'),w:150});
+      S.btns=btnRow(d,BY);drawBtns(c,S.btns);
+    }
+    if(S.over&&!S.lv){
       c.fillStyle='rgba(12,17,28,0.9)';c.fillRect(0,0,W,H);
       const y0=CMP?36:70;
       txt(c,T('lost'),W/2,y0,CMP?34:42,C.fg,'center',800);
@@ -729,10 +869,10 @@ function TrapGame(){
       txt(c,T('unlockProg',{a:ALL.filter(k=>M.unlocked[k]).length,b:ALL.length}),W/2,y0+(CMP?70:100),17,C.sun,'center',800);
       const ly=y0+(CMP?104:136),lstep=CMP?32:40,rh=CMP?28:32;
       if(!locked.length)txt(c,T('allUnlocked'),W/2,ly,17,C.fg,'center',700);
-      locked.slice(0,CMP?5:6).forEach((gl,i)=>{const[a,b]=gl.p(),y=ly+i*lstep;rr(c,W/2-270,y-rh/2,540,rh,8);c.fillStyle=C.surface;c.fill();icon(c,gl.id,W/2-246,y,0.7);
+      locked.slice(0,CMP?(H<470?4:5):6).forEach((gl,i)=>{const[a,b]=gl.p(),y=ly+i*lstep;rr(c,W/2-270,y-rh/2,540,rh,8);c.fillStyle=C.surface;c.fill();icon(c,gl.id,W/2-246,y,0.7);
         fitTxt(c,T('goalLine',{name:TD[gl.id].name,text:gl.text}),W/2-222,y,15,430,C.fg,'left',600);txt(c,`${Math.min(a,b)}/${b}`,W/2+256,y,15,C.sun,'right',800)});
-      if(!S.revived){rr(c,BTN_REV.x,BTN_REV.y,BTN_REV.w,BTN_REV.h,12);c.fillStyle=C.mint;c.fill();fitTxt(c,T('reviveFree'),BTN_REV.x+BTN_REV.w/2,BTN_REV.y+BTN_REV.h/2,16,BTN_REV.w-24,C.deep,'center',800)}
-      const rb=S.revived?{x:W/2-100,y:H-76,w:200,h:52}:BTN_RE;rr(c,rb.x,rb.y,rb.w,rb.h,12);c.fillStyle=C.surface2;c.fill();fitTxt(c,T('restart'),rb.x+rb.w/2,rb.y+rb.h/2,16,rb.w-24,C.fg,'center',700);
+      const d=[];if(HOOK.revive&&!S.revived)d.push({id:'revive',label:T(HOOK.reviveKey||'revive'),w:330,col:C.mint,fg:C.deep});d.push({id:'retry',label:T('restart'),w:170},{id:'menu',label:T('menu'),w:150});
+      S.btns=btnRow(d,BY);drawBtns(c,S.btns);
     }
     c.restore();
   };
@@ -760,9 +900,9 @@ function rewarded(){
   let p;try{p=sdk()?sdk().rewardedBreak(muteAudio):Promise.resolve(true)}catch(e){p=Promise.resolve(false)}
   return Promise.resolve(p).catch(()=>false).then(ok=>{unmuteAudio();adPlaying=false;return !!ok});
 }
-HOOK.over=()=>gpStop();
-HOOK.restart=()=>{commercial().then(()=>{game.reset();gpStart()})};
-HOOK.revive=()=>{rewarded().then(ok=>{if(ok){game.revive();gpStart()}else game.flash(T('adFail'))})};
+HOOK.reviveKey='reviveFree';HOOK.stop=()=>gpStop();
+HOOK.ad=cb=>{commercial().then(cb)};
+HOOK.revive=cb=>{rewarded().then(ok=>{cb(ok);if(ok)gpStart()})};
 
 function resize(){const r=cv.getBoundingClientRect();if(!r.width)return;const d=Math.min(2,window.devicePixelRatio||1);cv.width=Math.round(r.width*d);cv.height=Math.round(r.height*d)}
 function avail(){const w=document.getElementById('wrap');const cs=getComputedStyle(w);return{aw:w.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight),ah:w.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom)}}
@@ -772,12 +912,12 @@ function layout(force){const nh=wantH();if(!game||(Math.abs(nh-H)>8&&(force||gam
 window.addEventListener('resize',()=>layout(false));
 function pt(e){const r=cv.getBoundingClientRect();return{x:(e.clientX-r.left)/r.width*W,y:(e.clientY-r.top)/r.height*H}}
 cv.addEventListener('pointerdown',e=>{e.preventDefault();if(adPlaying||!game)return;try{cv.setPointerCapture(e.pointerId)}catch(_){}
-  const p=pt(e);game.move(p.x,p.y);const wasOver=game.isOver&&game.isOver();game.down(p.x,p.y);if(!wasOver)gpStart()});
+  const p=pt(e);game.move(p.x,p.y);game.down(p.x,p.y);if(game.inPlay())gpStart()});
 cv.addEventListener('pointermove',e=>{if(adPlaying||!game)return;const p=pt(e);game.move(p.x,p.y)});
 window.addEventListener('keydown',e=>{
   if(['Space','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.code))e.preventDefault();
   if(adPlaying||!game)return;
-  if((e.code==='Space'||e.code==='Enter')&&!game.isOver()){gpStart();game.skip()}
+  if((e.code==='Space'||e.code==='Enter')&&game.inPlay()){gpStart();game.skip()}
 });
 window.addEventListener('wheel',e=>e.preventDefault(),{passive:false});
 window.addEventListener('contextmenu',e=>e.preventDefault());
